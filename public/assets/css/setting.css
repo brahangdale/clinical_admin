@@ -1,0 +1,133 @@
+    /* Card Body */
+.sam-settings-body{
+    padding:30px;
+}
+
+/* Form Group */
+.sam-form-group{
+    margin-bottom:22px;
+}
+
+/* Label */
+.sam-form-label{
+    font-size:14px;
+    font-weight:600;
+    color:#374151;
+    margin-bottom:8px;
+}
+
+/* Inputs */
+.sam-settings-body .form-control{
+    min-height:48px;
+    border-radius:10px;
+    border:1px solid #dbe2ea;
+    padding:10px 14px;
+    box-shadow:none;
+    transition:.25s;
+}
+
+.sam-settings-body textarea.form-control{
+    min-height:110px;
+    resize:none;
+}
+
+.sam-settings-body .form-control:focus{
+    border-color:#0d6efd;
+    box-shadow:0 0 0 .15rem rgba(13,110,253,.15);
+}
+
+/* Helper Text */
+.sam-helper{
+    font-size:13px;
+    color:#6c757d;
+    margin-top:6px;
+    display:block;
+}
+
+/* Section Heading */
+.sam-section-title{
+    font-size:17px;
+    font-weight:700;
+    color:#222;
+    margin-bottom:18px;
+}
+
+/* Divider */
+.sam-divider{
+    margin:30px 0;
+}
+
+/* Table */
+.sam-table th{
+    background:#f8f9fa;
+    font-weight:600;
+    padding:14px;
+}
+
+.sam-table td{
+    padding:12px;
+    vertical-align:middle;
+}
+
+.sam-table input[type=time]{
+    min-height:44px;
+}
+
+/* Header */
+.card-header h5{
+    font-size:18px;
+    font-weight:600;
+}
+
+/*upload photo 5 start*/
+     .sam-gallery-preview {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .sam-gallery-item {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+            background: #f8f9fa;
+        }
+
+        .sam-gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .sam-gallery-remove {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 26px;
+            height: 26px;
+            border: 0;
+            border-radius: 50%;
+            background: rgba(220, 38, 38, 0.9);
+            color: #fff;
+            font-size: 16px;
+            line-height: 26px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .sam-gallery-preview {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sam-gallery-preview {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }

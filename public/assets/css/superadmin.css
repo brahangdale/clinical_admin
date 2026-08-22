@@ -1,0 +1,4103 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --sam-primary: #2563eb;
+    --sam-primary-dark: #1d4ed8;
+    --sam-bg: #f8fafc;
+    --sam-card: #ffffff;
+    --sam-border: #e2e8f0;
+    --sam-text: #0f172a;
+    --sam-muted: #64748b;
+}
+
+.day-schedule input:disabled{
+    background:#f3f4f6;
+    cursor:not-allowed;
+}
+
+.day-schedule{
+    transition:all .3s ease;
+}
+
+/*mobile bottom bar start*/
+/* Desktop */
+.sam-mobile-bottom-nav {
+    display: none;
+}
+
+@media (max-width:768px) {
+    .sam-dashboard-content {
+        padding-bottom: 100px !important;
+    }
+
+}
+
+@media (max-width:768px) {
+
+    body {
+        padding-bottom: 50px !important;
+    }
+
+}
+
+/* Mobile Only */
+@media (max-width:768px) {
+
+
+    .sam-mobile-bottom-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        position: fixed;
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+
+        height: 68px;
+
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+
+        border: 1px solid rgba(255, 255, 255, 0.4);
+
+        border-radius: 22px;
+
+        box-shadow:
+            0 10px 30px rgba(0, 0, 0, .12),
+            0 3px 10px rgba(13, 110, 253, .08);
+
+        z-index: 1;
+    }
+
+    .sam-mobile-bottom-nav a {
+        flex: 1;
+        text-decoration: none;
+        color: #7b8794;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        position: relative;
+
+        font-size: 10px;
+        font-weight: 600;
+
+        transition: all .3s ease;
+    }
+
+    .sam-mobile-bottom-nav a i {
+        font-size: 20px;
+        margin-bottom: 4px;
+        transition: all .3s ease;
+    }
+
+    .sam-mobile-bottom-nav a span {
+        font-size: 10px;
+        letter-spacing: .2px;
+    }
+
+    /* Hover */
+    .sam-mobile-bottom-nav a:hover {
+        color: #0d6efd;
+    }
+
+    .sam-mobile-bottom-nav a:hover i {
+        transform: translateY(-3px);
+    }
+
+    /* Active Menu */
+    .sam-mobile-bottom-nav a.active {
+        color: #0d6efd;
+    }
+
+    .sam-mobile-bottom-nav a.active::before {
+        content: '';
+        position: absolute;
+
+        width: 48px;
+        height: 48px;
+
+        top: 2px;
+
+        background: linear-gradient(135deg,
+                rgba(13, 110, 253, .15),
+                rgba(13, 110, 253, .08));
+
+        border-radius: 14px;
+
+        z-index: -1;
+    }
+
+    .sam-mobile-bottom-nav a.active i {
+        transform: translateY(-4px) scale(1.1);
+        text-shadow: 0 4px 12px rgba(13, 110, 253, .35);
+    }
+
+    /* Click Animation */
+    .sam-mobile-bottom-nav a:active {
+        transform: scale(.92);
+    }
+
+}
+
+/*mobile bottom bar end*/
+body {
+    margin: 0;
+    background: var(--sam-bg);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body.sam-login-page {
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    background:
+        radial-gradient(circle at top right, #dbeafe, transparent 30%),
+        radial-gradient(circle at bottom left, #bfdbfe, transparent 30%),
+        #f8fafc;
+    overflow-x: hidden;
+}
+
+.sam-login-wrapper {
+    min-height: 100vh;
+}
+
+/* LEFT PANEL */
+.sam-login-left {
+    background:
+        linear-gradient(135deg,
+            #2563eb,
+            #1d4ed8);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 60px;
+    position: relative;
+}
+
+.sam-login-left::before {
+    content: '';
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .08);
+    position: absolute;
+    top: -80px;
+    right: -80px;
+}
+
+.sam-login-left::after {
+    content: '';
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .05);
+    position: absolute;
+    bottom: -60px;
+    left: -60px;
+}
+
+.sam-login-brand-icon {
+    font-size: 70px;
+    margin-bottom: 25px;
+    z-index: 2;
+}
+
+.sam-login-brand-title {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-align: center;
+    z-index: 2;
+}
+
+.sam-login-brand-text {
+    font-size: 17px;
+    max-width: 500px;
+    text-align: center;
+    opacity: .95;
+    z-index: 2;
+}
+
+.sam-login-features {
+    margin-top: 40px;
+    width: 100%;
+    max-width: 420px;
+    z-index: 2;
+}
+
+.sam-login-feature {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 18px;
+    background: rgba(255, 255, 255, .10);
+    padding: 14px 18px;
+    border-radius: 14px;
+}
+
+/* RIGHT PANEL */
+.sam-login-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+.sam-login-card {
+    width: 100%;
+    max-width: 460px;
+    background: #fff;
+    border-radius: 24px;
+    padding: 40px;
+    border: 1px solid #e2e8f0;
+    box-shadow:
+        0 20px 40px rgba(15, 23, 42, .08);
+}
+
+.sam-login-logo {
+    width: 85px;
+    height: 85px;
+    margin: auto;
+    margin-bottom: 25px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 34px;
+    background:
+        linear-gradient(135deg,
+            #2563eb,
+            #1d4ed8);
+}
+
+.sam-login-title {
+    text-align: center;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.sam-login-subtitle {
+    text-align: center;
+    color: #64748b;
+    margin-bottom: 30px;
+}
+
+.sam-login-label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #334155;
+}
+
+.sam-login-input {
+    height: 55px;
+    border-radius: 14px;
+    border: 1px solid #dbe2ee;
+}
+
+.sam-login-input:focus {
+    border-color: #2563eb;
+    box-shadow:
+        0 0 0 4px rgba(37, 99, 235, .12);
+}
+
+.sam-login-input-group-text {
+    border-radius: 14px 0 0 14px;
+}
+
+.sam-login-password-btn {
+    border-radius: 0 14px 14px 0;
+}
+
+.sam-login-btn {
+    height: 55px;
+    border: none;
+    border-radius: 14px;
+    font-weight: 600;
+    background:
+        linear-gradient(135deg,
+            #2563eb,
+            #1d4ed8);
+    transition: .3s;
+}
+
+.sam-login-btn:hover {
+    transform: translateY(-2px);
+    background:
+        linear-gradient(135deg,
+            #1d4ed8,
+            #1e40af);
+}
+
+.sam-login-footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+@media(max-width:991px) {
+    .sam-login-left {
+        display: none;
+    }
+
+    .sam-login-right {
+        padding: 20px;
+    }
+
+    .sam-login-card {
+        padding: 30px;
+    }
+}
+
+/*dashboard home page start*/
+/* ==========================
+SUPER ADMIN DASHBOARD CSS
+PREFIX = sam-dashboard-
+========================== */
+/* Sidebar */
+.sam-dashboard-sidebar {
+    width: 270px;
+    height: 100vh;
+    background: #fff;
+    position: fixed;
+    left: 0;
+    top: 0;
+    border-right: 1px solid var(--sam-border);
+    overflow-y: auto;
+}
+
+.sam-dashboard-logo {
+    padding: 25px;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--sam-primary);
+    border-bottom: 1px solid var(--sam-border);
+}
+
+.sam-dashboard-menu {
+    padding: 20px;
+}
+
+.sam-dashboard-menu a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #334155;
+    padding: 14px 18px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    transition: .3s;
+}
+
+.sam-dashboard-menu a:hover {
+    background: #eff6ff;
+    color: var(--sam-primary);
+}
+
+.sam-dashboard-menu a.active {
+    background: var(--sam-primary);
+    color: #fff;
+}
+
+/* Main */
+.sam-dashboard-main {
+    margin-left: 245px;
+    padding: 15px;
+}
+
+/* Header */
+.sam-dashboard-header {
+    background: #fff;
+    height: 80px;
+    border-bottom: 1px solid var(--sam-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+}
+
+.sam-dashboard-search {
+    width: 320px;
+}
+
+.sam-dashboard-search input {
+    border-radius: 12px;
+    height: 45px;
+}
+
+.sam-dashboard-header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.sam-dashboard-notification {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.sam-dashboard-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sam-dashboard-profile img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+}
+
+/* Content */
+.sam-dashboard-content {
+    padding: 30px;
+}
+
+/* Cards */
+.sam-dashboard-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 25px;
+    border: 1px solid var(--sam-border);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, .03);
+    transition: .3s;
+}
+
+.sam-dashboard-card:hover {
+    transform: translateY(-4px);
+}
+
+.sam-dashboard-card-icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 22px;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg,
+            var(--sam-primary),
+            var(--sam-primary-dark));
+}
+
+.sam-dashboard-card-title {
+    color: var(--sam-muted);
+    font-size: 14px;
+}
+
+.sam-dashboard-card-value {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--sam-text);
+}
+
+/* Table */
+.sam-dashboard-table-card {
+    margin-top: 30px;
+    background: #fff;
+    border-radius: 18px;
+    padding: 25px;
+    border: 1px solid var(--sam-border);
+}
+
+.sam-dashboard-table-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.table th {
+    background: #f8fafc;
+}
+
+/* Mobile */
+@media(max-width:991px) {
+    .sam-dashboard-sidebar {
+        left: -270px;
+    }
+
+    .sam-dashboard-main {
+        margin-left: 0;
+    }
+
+    .sam-dashboard-search {
+        display: none;
+    }
+}
+
+/*dashboard home page end*/
+/*clinics page start*/
+.sam-clinic-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.sam-clinic-title {
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.sam-clinic-add-btn {
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 20px;
+}
+
+.sam-clinic-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 20px;
+}
+
+.sam-clinic-search {
+    height: 50px;
+    border-radius: 12px;
+}
+
+.sam-clinic-stats-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 25px;
+    border: 1px solid #e2e8f0;
+}
+
+.sam-clinic-stats-card h6 {
+    color: #64748b;
+}
+
+.sam-clinic-stats-card h2 {
+    margin-top: 10px;
+    font-weight: 700;
+}
+
+.sam-clinic-table thead th {
+    background: #f8fafc;
+}
+
+.sam-clinic-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 26px;
+    margin-top: 15px;
+    padding: 10px;
+}
+
+.sam-clinic-modal {
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.sam-clinic-input {
+    height: 50px;
+    border-radius: 12px;
+}
+
+textarea.sam-clinic-input {
+    height: auto;
+}
+
+.sam-clinic-save-btn {
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 25px;
+}
+
+.sam-clinic-save-btn:hover {
+    background: #1d4ed8;
+}
+
+.sam-clinic-mini-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 15px;
+    text-align: center;
+}
+
+.sam-clinic-mini-card h6 {
+    color: #64748b;
+    margin-bottom: 10px;
+}
+
+.sam-clinic-mini-card h3 {
+    font-weight: 700;
+}
+
+
+/* Mobile Responsive Table */
+@media (max-width: 768px) {
+
+    .sam-clinic-table,
+    .sam-clinic-table thead,
+    .sam-clinic-table tbody,
+    .sam-clinic-table th,
+    .sam-clinic-table td,
+    .sam-clinic-table tr {
+        display: block;
+        width: 100%;
+    }
+
+    .sam-clinic-table thead {
+        display: none;
+    }
+
+    .sam-clinic-table tr {
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        margin-bottom: 15px;
+        padding: 12px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .sam-clinic-table td {
+        border: none !important;
+        padding: 8px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: right;
+        font-size: 14px;
+    }
+
+    .sam-clinic-table td::before {
+        font-weight: 600;
+        color: #333;
+        text-align: left;
+    }
+
+    .sam-clinic-table td:nth-child(1)::before {
+        content: "Clinic";
+    }
+
+    .sam-clinic-table td:nth-child(2)::before {
+        content: "Owner";
+    }
+
+    .sam-clinic-table td:nth-child(3)::before {
+        content: "Mobile";
+    }
+
+    .sam-clinic-table td:nth-child(4)::before {
+        content: "Status";
+    }
+
+    .sam-clinic-table td:nth-child(5)::before {
+        content: "Created";
+    }
+
+    .sam-clinic-table td:nth-child(6)::before {
+        content: "Actions";
+    }
+
+    /* Action Buttons */
+    .sam-clinic-table td:last-child {
+        display: block;
+        text-align: left;
+        padding-top: 12px;
+    }
+
+    .sam-clinic-table td:last-child button {
+        width: 100%;
+        margin-bottom: 8px;
+        border-radius: 8px;
+    }
+
+    .sam-clinic-table td:last-child button:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.sam-clinic-stats-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, .08);
+    height: 100%;
+    transition: .3s;
+}
+
+.sam-clinic-stats-card h6 {
+    margin-bottom: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #6c757d;
+}
+
+.sam-clinic-stats-card h2 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 700;
+    color: #212529;
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+
+    .sam-clinic-stats-card {
+        padding: 12px 6px;
+        border-radius: 10px;
+    }
+
+    .sam-clinic-stats-card h6 {
+        font-size: 11px;
+        line-height: 1.2;
+        margin-bottom: 4px;
+    }
+
+    .sam-clinic-stats-card h2 {
+        font-size: 20px;
+        line-height: 1;
+    }
+
+}
+
+
+@media (max-width: 768px) {
+
+    .sam-clinic-card {
+        background: #f8fafc;
+        padding: 10px;
+        border-radius: 14px;
+    }
+
+    .sam-clinic-table tr {
+        transition: all 0.3s ease;
+    }
+
+    .sam-clinic-table tr:hover {
+        transform: translateY(-2px);
+    }
+
+    .sam-clinic-table strong {
+        color: #0d6efd;
+        font-size: 15px;
+    }
+
+    .badge {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+}
+
+
+/*clinics page end*/
+
+
+/*clinics admin page start*/
+/* ==========================
+Clinic Admin Header
+========================== */
+.sam-admin-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    margin-top: 15px;
+    padding: 10px;
+}
+
+.sam-admin-title {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.sam-admin-header p {
+    font-size: 14px;
+    color: #64748b;
+}
+
+/* ==========================
+Add Admin Button
+========================== */
+.sam-admin-add-btn {
+    background:
+        linear-gradient(135deg,
+            #2563eb,
+            #1d4ed8);
+    color: #fff !important;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 22px;
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: .3s;
+    box-shadow:
+        0 8px 20px rgba(37, 99, 235, .20);
+}
+
+.sam-admin-add-btn:hover {
+    transform: translateY(-2px);
+    background:
+        linear-gradient(135deg,
+            #1d4ed8,
+            #1e40af);
+    color: #fff;
+}
+
+.sam-admin-add-btn:focus {
+    box-shadow:
+        0 0 0 4px rgba(37, 99, 235, .15);
+}
+
+.sam-admin-add-btn i {
+    font-size: 14px;
+}
+
+/* ==========================
+Mobile
+========================== */
+@media(max-width:768px) {
+    .sam-admin-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .sam-admin-add-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+.sam-admin-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 20px;
+}
+
+.sam-admin-stats-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 25px;
+}
+
+.sam-admin-stats-card h6 {
+    color: #64748b;
+    margin-bottom: 10px;
+}
+
+.sam-admin-stats-card h2 {
+    font-weight: 700;
+    margin: 0;
+}
+
+.sam-admin-search {
+    height: 50px;
+    border-radius: 12px;
+}
+
+.sam-admin-avatar {
+    width: 90px;
+    height: 90px;
+    margin: auto;
+    border-radius: 50%;
+    background: #eff6ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2563eb;
+    font-size: 34px;
+}
+
+.sam-admin-input {
+    height: 50px;
+    border-radius: 12px;
+}
+
+.sam-credential-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 20px;
+    border-radius: 14px;
+}
+
+.sam-credential-box p {
+    margin-bottom: 12px;
+}
+
+/*clinics admin page end*/
+/*super doctor code start*/
+.sam-doctor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.sam-doctor-title {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.sam-doctor-add-btn {
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 22px;
+}
+
+.sam-doctor-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 20px;
+}
+
+.sam-doctor-stats-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 25px;
+}
+
+.sam-doctor-stats-card h6 {
+    color: #64748b;
+}
+
+.sam-doctor-stats-card h2 {
+    font-weight: 700;
+}
+
+.sam-doctor-search {
+    height: 50px;
+    border-radius: 12px;
+}
+
+.sam-doctor-modal {
+    border: none;
+    border-radius: 20px;
+}
+
+.sam-doctor-input {
+    height: 50px;
+    border-radius: 12px;
+}
+
+.sam-doctor-mini-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 15px;
+    text-align: center;
+}
+
+.sam-doctor-mini-card h6 {
+    color: #64748b;
+    margin-bottom: 8px;
+}
+
+.sam-doctor-mini-card h3 {
+    font-weight: 700;
+    margin: 0;
+}
+
+
+/* =========================
+   Mobile Responsive Doctor Table
+========================= */
+@media (max-width: 768px) {
+
+    .sam-doctor-card {
+        background: #f8fafc;
+        padding: 10px;
+        border-radius: 15px;
+    }
+
+    .sam-doctor-card table,
+    .sam-doctor-card thead,
+    .sam-doctor-card tbody,
+    .sam-doctor-card th,
+    .sam-doctor-card td,
+    .sam-doctor-card tr {
+        display: block;
+        width: 100%;
+    }
+
+    .sam-doctor-card thead {
+        display: none;
+    }
+
+    .sam-doctor-card tbody tr {
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 16px;
+        padding: 15px;
+        margin-bottom: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+        overflow: hidden;
+    }
+
+    .sam-doctor-card td {
+        border: none !important;
+        padding: 8px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+    }
+
+    .sam-doctor-card td::before {
+        font-weight: 600;
+        color: #374151;
+        margin-right: 15px;
+    }
+
+    .sam-doctor-card td:nth-child(1) {
+        justify-content: center;
+        padding-bottom: 15px;
+    }
+
+    .sam-doctor-card td:nth-child(1)::before {
+        display: none;
+    }
+
+    .sam-doctor-card td:nth-child(2)::before {
+        content: "Doctor";
+    }
+
+    .sam-doctor-card td:nth-child(3)::before {
+        content: "Clinic";
+    }
+
+    .sam-doctor-card td:nth-child(4)::before {
+        content: "Specialization";
+    }
+
+    .sam-doctor-card td:nth-child(5)::before {
+        content: "Mobile";
+    }
+
+    .sam-doctor-card td:nth-child(6)::before {
+        content: "Experience";
+    }
+
+    .sam-doctor-card td:nth-child(7)::before {
+        content: "Fee";
+    }
+
+    .sam-doctor-card td:nth-child(8)::before {
+        content: "Status";
+    }
+
+    .sam-doctor-card td:nth-child(9)::before {
+        content: "Actions";
+    }
+
+    /* Doctor Photo */
+    .sam-doctor-card img {
+        width: 70px !important;
+        height: 70px !important;
+        border: 3px solid #0d6efd;
+        padding: 2px;
+    }
+
+    /* Doctor Name */
+    .sam-doctor-card strong {
+        color: #0d6efd;
+        font-size: 15px;
+    }
+
+    /* Action Buttons */
+    .sam-doctor-card td:last-child {
+        display: block;
+        padding-top: 12px;
+    }
+
+    .sam-doctor-card td:last-child button {
+        width: 100%;
+        margin-bottom: 8px;
+        border-radius: 10px;
+        font-weight: 600;
+    }
+
+    .sam-doctor-card td:last-child button:last-child {
+        margin-bottom: 0;
+    }
+
+    .sam-doctor-card .badge {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}
+
+
+.sam-doctor-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .05);
+}
+
+.sam-doctor-card .form-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #6b7280;
+    margin-bottom: 6px;
+}
+
+.sam-doctor-card .form-control,
+.sam-doctor-card .form-select {
+    height: 48px;
+    border-radius: 10px;
+}
+
+.sam-filter-btns .btn {
+    height: 48px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+/* Mobile */
+@media (max-width:768px) {
+
+    .sam-doctor-card {
+        padding: 15px;
+    }
+
+    .sam-filter-btns {
+        flex-direction: column;
+    }
+
+    .sam-filter-btns .btn {
+        width: 100%;
+    }
+
+    .sam-doctor-card .form-control,
+    .sam-doctor-card .form-select {
+        font-size: 14px;
+    }
+}
+
+
+/*super doctor code end*/
+/*super paient code start*/
+/* ==========================
+PATIENT HEADER
+========================== */
+
+/* ==========================
+   Mobile Responsive Patient Table
+========================== */
+@media (max-width:768px) {
+
+    .sam-clinic-card {
+        background: #f8fafc;
+        padding: 10px;
+        border-radius: 15px;
+    }
+
+    .sam-clinic-card table,
+    .sam-clinic-card thead,
+    .sam-clinic-card tbody,
+    .sam-clinic-card th,
+    .sam-clinic-card td,
+    .sam-clinic-card tr {
+        display: block;
+        width: 100%;
+    }
+
+    .sam-clinic-card thead {
+        display: none;
+    }
+
+    .sam-clinic-card tbody tr {
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-left: 4px solid #0d6efd;
+        border-radius: 14px;
+        padding: 14px;
+        margin-bottom: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    }
+
+    .sam-clinic-card td {
+        border: none !important;
+        padding: 7px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: right;
+        font-size: 14px;
+    }
+
+    .sam-clinic-card td::before {
+        font-weight: 600;
+        color: #374151;
+        text-align: left;
+        margin-right: 15px;
+    }
+
+    .sam-clinic-card td:nth-child(1)::before {
+        content: "Patient ID";
+    }
+
+    .sam-clinic-card td:nth-child(2)::before {
+        content: "Name";
+    }
+
+    .sam-clinic-card td:nth-child(3)::before {
+        content: "Mobile";
+    }
+
+    .sam-clinic-card td:nth-child(4)::before {
+        content: "Age";
+    }
+
+    .sam-clinic-card td:nth-child(5)::before {
+        content: "Gender";
+    }
+
+    .sam-clinic-card td:nth-child(6)::before {
+        content: "Clinic";
+    }
+
+    .sam-clinic-card td:nth-child(7)::before {
+        content: "Doctor";
+    }
+
+    .sam-clinic-card td:nth-child(8)::before {
+        content: "Status";
+    }
+
+    .sam-clinic-card td:nth-child(9)::before {
+        content: "Actions";
+    }
+
+    /* Name Highlight */
+    .sam-clinic-card td:nth-child(2) {
+        font-weight: 600;
+        color: #0d6efd;
+    }
+
+    /* Badge */
+    .sam-clinic-card .badge {
+        font-size: 12px;
+        padding: 6px 10px;
+        border-radius: 20px;
+    }
+
+    /* Action Buttons */
+    .sam-clinic-card td:last-child {
+        display: block;
+        padding-top: 12px;
+    }
+
+    .sam-clinic-card td:last-child button {
+        width: 100%;
+        margin-bottom: 8px;
+        border-radius: 10px;
+        font-weight: 600;
+    }
+
+    .sam-clinic-card td:last-child button:last-child {
+        margin-bottom: 0;
+    }
+}
+
+
+.sam-patient-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.sam-patient-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 5px;
+}
+
+.sam-patient-add-btn {
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 22px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.sam-patient-add-btn:hover {
+    background: #1d4ed8;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* ==========================
+CARD
+========================== */
+.sam-patient-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 20px;
+}
+
+/* ==========================
+STATS CARD
+========================== */
+.sam-patient-stats-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 25px;
+    transition: .3s;
+}
+
+.sam-patient-stats-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .05);
+}
+
+.sam-patient-stats-card h6 {
+    color: #64748b;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.sam-patient-stats-card h2 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+/* ==========================
+SEARCH
+========================== */
+.sam-patient-search {
+    height: 50px;
+    border-radius: 12px;
+}
+
+/* ==========================
+TABLE
+========================== */
+.sam-patient-card table {
+    margin-bottom: 0;
+}
+
+.sam-patient-card thead th {
+    background: #f8fafc;
+    color: #334155;
+    font-size: 14px;
+    font-weight: 600;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.sam-patient-card tbody td {
+    vertical-align: middle;
+}
+
+/* ==========================
+MODAL
+========================== */
+.sam-patient-modal {
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.sam-patient-input {
+    height: 50px;
+    border-radius: 12px;
+}
+
+.sam-patient-input:focus {
+    border-color: #2563eb;
+    box-shadow:
+        0 0 0 4px rgba(37, 99, 235, .10);
+}
+
+/* ==========================
+OFFCANVAS
+========================== */
+#samPatientViewOffcanvas {
+    width: 500px;
+}
+
+/* ==========================
+MINI CARD
+========================== */
+.sam-patient-mini-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 15px;
+    text-align: center;
+}
+
+.sam-patient-mini-card h6 {
+    color: #64748b;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.sam-patient-mini-card h3 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+/* ==========================
+ACTION BUTTONS
+========================== */
+.sam-patient-action-btn {
+    margin-right: 5px;
+}
+
+/* ==========================
+RESPONSIVE
+========================== */
+@media(max-width:991px) {
+    .sam-patient-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .sam-patient-add-btn {
+        width: 100%;
+    }
+}
+
+@media(max-width:768px) {
+    #samPatientViewOffcanvas {
+        width: 100%;
+    }
+
+    .sam-patient-title {
+        font-size: 24px;
+    }
+}
+
+/*super patient code end*/
+/*super appointment code start*/
+/* ===================================
+APPOINTMENT HEADER
+=================================== */
+.sam-appointment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.sam-appointment-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 5px;
+}
+
+.sam-appointment-add-btn {
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 22px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.sam-appointment-add-btn:hover {
+    background: #1d4ed8;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* ===================================
+CARD
+=================================== */
+.sam-appointment-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 20px;
+}
+
+/* ===================================
+STATS CARD
+=================================== */
+.sam-appointment-stats-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 25px;
+    transition: .3s;
+}
+
+.sam-appointment-stats-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .06);
+}
+
+.sam-appointment-stats-card h6 {
+    color: #64748b;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.sam-appointment-stats-card h2 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+/* ===================================
+SEARCH SECTION
+=================================== */
+.sam-appointment-card .form-control,
+.sam-appointment-card .form-select {
+    height: 50px;
+    border-radius: 12px;
+}
+
+/* ===================================
+TABLE
+=================================== */
+.sam-appointment-card table {
+    margin-bottom: 0;
+}
+
+.sam-appointment-card thead th {
+    background: #f8fafc;
+    color: #334155;
+    font-size: 14px;
+    font-weight: 600;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.sam-appointment-card tbody td {
+    vertical-align: middle;
+}
+
+/* ===================================
+STATUS BADGES
+=================================== */
+.sam-status-pending {
+    background: #fef3c7;
+    color: #92400e;
+    padding: 7px 12px;
+    border-radius: 30px;
+    font-size: 12px;
+}
+
+.sam-status-confirmed {
+    background: #dcfce7;
+    color: #166534;
+    padding: 7px 12px;
+    border-radius: 30px;
+    font-size: 12px;
+}
+
+.sam-status-cancelled {
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 7px 12px;
+    border-radius: 30px;
+    font-size: 12px;
+}
+
+/* ===================================
+MODAL
+=================================== */
+.sam-appointment-modal {
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.sam-appointment-input {
+    height: 50px;
+    border-radius: 12px;
+}
+
+.sam-appointment-input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, .10);
+}
+
+/* ===================================
+OFFCANVAS
+=================================== */
+#samAppointmentViewOffcanvas {
+    width: 500px;
+}
+
+/* ===================================
+APPOINTMENT SUMMARY CARDS
+=================================== */
+.sam-appointment-mini-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 15px;
+    text-align: center;
+}
+
+.sam-appointment-mini-card h6 {
+    color: #64748b;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.sam-appointment-mini-card h3 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+/* ===================================
+ACTION BUTTONS
+=================================== */
+.sam-appointment-action-btn {
+    margin-right: 5px;
+}
+
+/* ===================================
+RESPONSIVE
+=================================== */
+@media(max-width:991px) {
+    .sam-appointment-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .sam-appointment-add-btn {
+        width: 100%;
+    }
+}
+
+@media(max-width:768px) {
+    #samAppointmentViewOffcanvas {
+        width: 100%;
+    }
+
+    .sam-appointment-title {
+        font-size: 24px;
+    }
+}
+
+/* ==========================
+APPOINTMENT STATUS DROPDOWN
+========================== */
+.sam-status-dropdown {
+    min-width: 180px;
+    height: 38px;
+    border: 1px solid #dbe3ef;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    background: #fff;
+    color: #334155;
+    cursor: pointer;
+    transition: .3s;
+    box-shadow: none;
+}
+
+.sam-status-dropdown:hover {
+    border-color: #2563eb;
+}
+
+.sam-status-dropdown:focus {
+    border-color: #2563eb;
+    box-shadow:
+        0 0 0 4px rgba(37, 99, 235, .10);
+}
+
+/* Status Colors */
+.sam-status-pending {
+    background: #fff7ed;
+    color: #c2410c;
+}
+
+.sam-status-confirmed {
+    background: #ecfdf5;
+    color: #15803d;
+}
+
+.sam-status-patient {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.sam-status-running {
+    background: #f5f3ff;
+    color: #7c3aed;
+}
+
+.sam-status-completed {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.sam-status-cancelled {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.sam-status-noshow {
+    background: #f8fafc;
+    color: #475569;
+}
+
+/*super appointment code end*/
+/*super report code start*/
+/* ===================================
+REPORT HEADER
+=================================== */
+.sam-report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.sam-report-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 5px;
+}
+
+/* ===================================
+REPORT CARD
+=================================== */
+.sam-report-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .03);
+}
+
+/* ===================================
+FILTERS
+=================================== */
+.sam-report-card .form-control,
+.sam-report-card .form-select {
+    height: 50px;
+    border-radius: 12px;
+    border: 1px solid #dbe3ef;
+}
+
+.sam-report-card .form-control:focus,
+.sam-report-card .form-select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, .10);
+}
+
+/* ===================================
+STATS CARDS
+=================================== */
+.sam-report-stats-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 25px;
+    transition: .3s;
+}
+
+.sam-report-stats-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .06);
+}
+
+.sam-report-stats-card h6 {
+    color: #64748b;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.sam-report-stats-card h2 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+/* ===================================
+CHART SECTION
+=================================== */
+.sam-report-card canvas {
+    width: 100% !important;
+    min-height: 320px;
+}
+
+/* ===================================
+TABLE
+=================================== */
+.sam-report-card table {
+    margin-bottom: 0;
+}
+
+.sam-report-card thead th {
+    background: #f8fafc;
+    color: #334155;
+    font-size: 14px;
+    font-weight: 600;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.sam-report-card tbody td {
+    vertical-align: middle;
+}
+
+/* ===================================
+EXPORT BUTTONS
+=================================== */
+.sam-report-header .btn {
+    border-radius: 12px;
+    padding: 10px 18px;
+    font-weight: 600;
+}
+
+/* ===================================
+TOP CLINICS TABLE
+=================================== */
+.sam-report-clinic-name {
+    font-weight: 600;
+    color: #0f172a;
+}
+
+/* ===================================
+TOP DOCTORS TABLE
+=================================== */
+.sam-report-doctor-name {
+    font-weight: 600;
+    color: #0f172a;
+}
+
+/* ===================================
+RESPONSIVE
+=================================== */
+@media(max-width:991px) {
+    .sam-report-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+}
+
+@media(max-width:768px) {
+    .sam-report-title {
+        font-size: 24px;
+    }
+
+    .sam-report-header .btn {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+
+    .sam-report-card {
+        padding: 15px;
+    }
+}
+
+/*super report code end*/
+/*super setting code start*/
+/* ===================================
+SETTINGS HEADER
+=================================== */
+.sam-settings-header {
+    margin-bottom: 25px;
+}
+
+.sam-settings-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 5px;
+}
+
+/* ===================================
+SETTINGS CARD
+=================================== */
+.sam-settings-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .03);
+    transition: .3s;
+}
+
+.sam-settings-card:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .05);
+}
+
+/* ===================================
+CARD HEADING
+=================================== */
+.sam-settings-card h5 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #0f172a;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.sam-settings-card h5 i {
+    color: #2563eb;
+}
+
+/* ===================================
+LABEL
+=================================== */
+.sam-settings-card label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 8px;
+}
+
+/* ===================================
+INPUT
+=================================== */
+.sam-settings-card .form-control,
+.sam-settings-card .form-select {
+    height: 50px;
+    border-radius: 12px;
+    border: 1px solid #dbe3ef;
+    font-size: 14px;
+}
+
+.sam-settings-card textarea.form-control {
+    min-height: 120px;
+    resize: none;
+}
+
+.sam-settings-card .form-control:focus,
+.sam-settings-card .form-select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, .10);
+}
+
+/* ===================================
+FILE INPUT
+=================================== */
+.sam-settings-card input[type="file"] {
+    padding: 10px;
+    height: auto;
+}
+
+/* ===================================
+SAVE BUTTON
+=================================== */
+.sam-settings-save-btn {
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 35px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.sam-settings-save-btn:hover {
+    background: #1d4ed8;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* ===================================
+LOGO PREVIEW BOX
+=================================== */
+.sam-logo-preview {
+    width: 120px;
+    height: 120px;
+    border: 2px dashed #cbd5e1;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8fafc;
+    color: #94a3b8;
+    font-size: 30px;
+    overflow: hidden;
+}
+
+.sam-logo-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* ===================================
+TOGGLE SWITCH
+=================================== */
+.sam-setting-switch {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    margin-bottom: 12px;
+}
+
+/* ===================================
+SECTION SPACING
+=================================== */
+.sam-settings-card+.sam-settings-card {
+    margin-top: 20px;
+}
+
+/* ===================================
+RESPONSIVE
+=================================== */
+@media(max-width:991px) {
+    .sam-settings-card {
+        padding: 20px;
+    }
+}
+
+@media(max-width:768px) {
+    .sam-settings-title {
+        font-size: 24px;
+    }
+
+    .sam-settings-save-btn {
+        width: 100%;
+    }
+}
+
+.sam-backup-box {
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 20px;
+    height: 100%;
+    background: #f8fafc;
+}
+
+.sam-backup-box h6 {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.sam-backup-box p {
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+/*super setting code end*/
+
+
+/*primium css start*/
+/* =====================================
+   PREMIUM UI OVERRIDE V1
+   ADD AT END OF CSS FILE
+===================================== */
+
+:root {
+
+    --sam-primary: #2563eb;
+    --sam-primary-dark: #1d4ed8;
+
+    --sam-success: #22c55e;
+    --sam-danger: #ef4444;
+    --sam-warning: #f59e0b;
+
+    --sam-bg: #f5f7fb;
+
+    --sam-card: #ffffff;
+
+    --sam-border: #e2e8f0;
+
+    --sam-text: #0f172a;
+
+    --sam-muted: #64748b;
+
+    --sam-shadow:
+        0 10px 30px rgba(15, 23, 42, .06);
+
+    --sam-shadow-hover:
+        0 20px 40px rgba(15, 23, 42, .10);
+
+}
+
+/* BODY */
+
+body {
+
+    background: var(--sam-bg);
+
+    color: var(--sam-text);
+
+    line-height: 1.6;
+
+    overflow-x: hidden;
+}
+
+/* SCROLLBAR */
+
+::-webkit-scrollbar {
+
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+
+    background: #cbd5e1;
+
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+
+    background: #94a3b8;
+}
+
+/* SIDEBAR */
+
+.sam-dashboard-sidebar {
+
+    background:
+        linear-gradient(180deg,
+            #ffffff,
+            #f8fafc);
+
+    box-shadow:
+        10px 0 40px rgba(15, 23, 42, .05);
+
+    border-right: none;
+}
+
+/* LOGO */
+
+.sam-dashboard-logo {
+
+    font-size: 24px;
+
+    font-weight: 800;
+
+    letter-spacing: .5px;
+}
+
+/* MENU */
+
+.sam-dashboard-menu a {
+
+    font-weight: 400;
+
+    border-radius: 14px;
+
+    transition: .3s;
+}
+
+.sam-dashboard-menu a:hover {
+
+    transform: translateX(5px);
+
+    background: #eff6ff;
+}
+
+.sam-dashboard-menu a.active {
+
+    background:
+        linear-gradient(135deg,
+            #2563eb,
+            #1d4ed8);
+
+    box-shadow:
+        0 12px 25px rgba(37, 99, 235, .25);
+}
+
+/* HEADER */
+
+.sam-dashboard-header {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 999;
+
+    background:
+        rgba(255, 255, 255, .85);
+
+    backdrop-filter: blur(14px);
+
+    border-bottom: 1px solid rgba(226, 232, 240, .7);
+}
+
+/* COMMON CARD */
+
+.sam-dashboard-card,
+.sam-clinic-card,
+.sam-admin-card,
+.sam-doctor-card,
+.sam-patient-card,
+.sam-appointment-card,
+.sam-report-card,
+.sam-settings-card {
+
+    border: none;
+
+    box-shadow: var(--sam-shadow);
+
+    transition: .35s;
+}
+
+.sam-dashboard-card:hover,
+.sam-clinic-stats-card:hover,
+.sam-admin-stats-card:hover,
+.sam-doctor-stats-card:hover,
+.sam-patient-stats-card:hover,
+.sam-appointment-stats-card:hover,
+.sam-report-stats-card:hover {
+
+    transform: translateY(-6px);
+
+    box-shadow: var(--sam-shadow-hover);
+}
+
+/* STATS CARDS */
+
+.sam-clinic-stats-card,
+.sam-admin-stats-card,
+.sam-doctor-stats-card,
+.sam-patient-stats-card,
+.sam-appointment-stats-card,
+.sam-report-stats-card {
+
+    background:
+        linear-gradient(180deg,
+            #ffffff,
+            #f8fafc);
+
+    border: none;
+
+    box-shadow: var(--sam-shadow);
+}
+
+/*.sam-clinic-stats-card h2,
+.sam-admin-stats-card h2,
+.sam-doctor-stats-card h2,
+.sam-patient-stats-card h2,
+.sam-appointment-stats-card h2,
+.sam-report-stats-card h2{
+
+    font-size:34px;
+
+    font-weight:500;
+}*/
+
+/* TABLE */
+
+.table {
+
+    margin-bottom: 0;
+}
+
+.table thead th {
+
+    background: #f8fafc !important;
+
+    border-bottom: none;
+
+    font-size: 13px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .4px;
+}
+
+.table tbody tr {
+
+    transition: .3s;
+}
+
+.table tbody tr:hover {
+
+    background: #f8fafc;
+}
+
+/* BUTTONS */
+
+.btn {
+
+    border-radius: 12px;
+
+    font-weight: 400;
+
+    transition: .3s;
+}
+
+.btn:hover {
+
+    transform: translateY(-2px);
+}
+
+/* PRIMARY BUTTON */
+
+.sam-clinic-add-btn,
+.sam-admin-add-btn,
+.sam-doctor-add-btn,
+.sam-patient-add-btn,
+.sam-appointment-add-btn,
+.sam-settings-save-btn {
+
+    background:
+        linear-gradient(135deg,
+            #2563eb,
+            #1d4ed8) !important;
+
+    border: none;
+}
+
+/* INPUTS */
+
+.form-control,
+.form-select {
+
+    border-radius: 12px;
+
+    border: 1px solid #dbe3ef;
+}
+
+.form-control:focus,
+.form-select:focus {
+
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 4px rgba(37, 99, 235, .10);
+}
+
+/* MODALS */
+
+.modal-content {
+
+    border: none;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 30px 60px rgba(15, 23, 42, .18);
+}
+
+/* OFFCANVAS */
+
+.offcanvas {
+
+    border-left: none;
+
+    box-shadow:
+        -10px 0 40px rgba(15, 23, 42, .08);
+}
+
+/* BADGES */
+
+.badge {
+
+    padding: 8px 12px;
+
+    border-radius: 30px;
+
+    font-weight: 600;
+}
+
+/* CHARTS */
+
+canvas {
+
+    max-width: 100%;
+}
+
+/* MOBILE */
+
+@media(max-width:991px) {
+
+    .sam-dashboard-main {
+
+        margin-left: 0;
+    }
+
+    .sam-dashboard-content {
+
+        padding: 15px;
+    }
+
+}
+
+/*primium css end*/
+
+
+/* ==========================
+   SIDEBAR
+========================== */
+
+.sam-dashboard-sidebar {
+
+    width: 270px;
+
+    height: 100vh;
+
+    background: #fff;
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    z-index: 1050;
+
+    overflow-y: auto;
+
+    transition: .35s ease;
+}
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media(max-width:991px) {
+
+    .sam-dashboard-sidebar {
+
+        left: -270px;
+
+        box-shadow:
+            0 20px 40px rgba(0, 0, 0, .15);
+    }
+
+    .sam-dashboard-sidebar.sam-sidebar-open {
+
+        left: 0;
+    }
+
+    .sam-sidebar-overlay {
+
+        position: fixed;
+
+        top: 0;
+
+        left: 0;
+
+        width: 100%;
+
+        height: 100%;
+
+        background: rgba(0, 0, 0, .45);
+
+        z-index: 1049;
+
+        display: none;
+    }
+
+    .sam-sidebar-overlay.active {
+
+        display: block;
+    }
+
+}
+
+
+
+/*Paitent Appointment add popup code start*/
+
+.stepper-wrapper{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:25px;
+    position:relative;
+}
+
+.stepper-wrapper::before{
+    content:'';
+    position:absolute;
+    top:18px;
+    left:0;
+    width:100%;
+    height:3px;
+    background:#dee2e6;
+    z-index:1;
+}
+
+.step-item{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    flex:1;
+}
+
+.step-circle{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:#dee2e6;
+    color:#6c757d;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:600;
+}
+
+.step-item.active .step-circle{
+    background:#0d6efd;
+    color:#fff;
+}
+
+.step-item.completed .step-circle{
+    background:#198754;
+    color:#fff;
+}
+
+.step-title{
+    font-size:12px;
+    margin-top:6px;
+}
+
+.step-content{
+    display:none;
+}
+
+.step-content.active{
+    display:block;
+}
+
+@media(max-width:768px){
+
+.step-title{
+    font-size:10px;
+}
+
+.step-circle{
+    width:32px;
+    height:32px;
+    font-size:13px;
+}
+
+}
+
+/* Form Labels */
+
+#appointmentForm label{
+    font-size:14px;
+    font-weight:600;
+    color:#344054;
+    margin-bottom:6px;
+    display:block;
+}
+
+/* Inputs */
+
+#appointmentForm .form-control,
+#appointmentForm .form-select{
+
+    height:52px;
+    border:1.5px solid #d0d5dd;
+    border-radius:12px;
+
+    font-size:14px;
+    font-weight:500;
+
+    background:#fff;
+
+    transition:all .3s ease;
+
+    box-shadow:none;
+}
+
+/* Textarea */
+
+#appointmentForm textarea.form-control{
+
+    min-height:120px;
+    resize:vertical;
+    padding-top:12px;
+}
+
+/* Placeholder */
+
+#appointmentForm ::placeholder{
+    color:#98a2b3;
+    font-size:13px;
+}
+
+/* Hover */
+
+#appointmentForm .form-control:hover,
+#appointmentForm .form-select:hover{
+
+    border-color:#9ec5fe;
+}
+
+/* Focus */
+
+#appointmentForm .form-control:focus,
+#appointmentForm .form-select:focus{
+
+    border-color:#0d6efd;
+
+    box-shadow:
+    0 0 0 4px rgba(13,110,253,.10);
+
+    background:#fff;
+}
+
+/* Readonly Fields */
+
+#appointmentForm .form-control[readonly]{
+
+    background:#f8fafc;
+    color:#667085;
+    font-weight:600;
+}
+
+/* Required Star */
+
+#appointmentForm label.required::after{
+
+    content:" *";
+    color:#dc3545;
+}
+
+/* Form Card Feel */
+
+.step-content{
+
+    background:#ffffff;
+
+    padding:24px;
+
+    border-radius:18px;
+
+    border:1px solid #eaecf0;
+
+    box-shadow:
+    0 2px 10px rgba(16,24,40,.04);
+}
+
+.availablee-status {
+    background: #ff8b8b45 !important;
+    color: #16a34a;
+    border: 1px solid rgba(34, 197, 94, .25);
+}
+
+.sam-appointment-body{
+    background:#f8fafc;
+}
+
+#quickAppointmentForm .form-control,
+#quickAppointmentForm .form-select{
+    border-radius:12px;
+    min-height:48px;
+    border:1px solid #d0d5dd;
+}
+
+#quickAppointmentForm .form-control:focus,
+#quickAppointmentForm .form-select:focus{
+    border-color:#0d6efd;
+    box-shadow:0 0 0 4px rgba(13,110,253,.10);
+}
+
+#quickAppointmentForm textarea{
+    min-height:90px;
+}
+
+#quickAppointmentForm .btn-primary{
+    border-radius:12px;
+    height:48px;
+    font-weight:600;
+}
+
+/* Select Arrow Better */
+
+#appointmentForm .form-select{
+
+    cursor:pointer;
+}
+
+/* Buttons */
+
+#prevBtn,
+#nextBtn,
+#submitBtn{
+
+    min-width:130px;
+
+    height:48px;
+
+    border-radius:12px;
+
+    font-weight:600;
+
+    transition:.3s;
+}
+
+#nextBtn:hover,
+#submitBtn:hover{
+
+    transform:translateY(-2px);
+}
+
+#prevBtn:hover{
+
+    transform:translateY(-2px);
+}
+
+/* Section Gap */
+
+.step-content .row{
+    row-gap:8px;
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+    .step-content{
+
+        padding:15px;
+        border-radius:14px;
+    }
+
+    #appointmentForm .form-control,
+    #appointmentForm .form-select{
+
+        height:48px;
+        font-size:14px;
+    }
+
+    #prevBtn,
+    #nextBtn,
+    #submitBtn{
+
+        min-width:110px;
+        height:44px;
+        font-size:14px;
+    }
+
+}
+
+@media (max-width:768px){
+
+.sam-appointment-card .table thead{
+    display:none;
+}
+
+.sam-appointment-card .table,
+.sam-appointment-card .table tbody,
+.sam-appointment-card .table tr,
+.sam-appointment-card .table td{
+    display:block;
+    width:100%;
+}
+
+.sam-appointment-card .table tr{
+    background:#fff;
+    margin-bottom:15px;
+    border-radius:18px;
+    overflow:hidden;
+    border:1px solid #e9ecef;
+
+    box-shadow:
+    0 4px 18px rgba(0,0,0,.05);
+
+    padding:12px;
+}
+
+.sam-appointment-card .table td{
+
+    border:none !important;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:10px 8px;
+
+    font-size:14px;
+}
+
+.sam-appointment-card .table td:before{
+
+    font-weight:600;
+    color:#667085;
+
+    margin-right:10px;
+}
+
+.sam-appointment-card .table td:nth-child(1):before{
+    content:"ID";
+}
+
+.sam-appointment-card .table td:nth-child(2):before{
+    content:"Patient";
+}
+
+.sam-appointment-card .table td:nth-child(3):before{
+    content:"Doctor";
+}
+
+.sam-appointment-card .table td:nth-child(4):before{
+    content:"Clinic";
+}
+
+.sam-appointment-card .table td:nth-child(5):before{
+    content:"Date";
+}
+
+.sam-appointment-card .table td:nth-child(6):before{
+    content:"Time";
+}
+
+.sam-appointment-card .table td:nth-child(7):before{
+    content:"Token";
+}
+
+.sam-appointment-card .table td:nth-child(8):before{
+    content:"Status";
+}
+
+.sam-appointment-card .table td:nth-child(9):before{
+    content:"View";
+}
+
+.sam-appointment-card .table td:nth-child(10):before{
+    content:"Edit";
+}
+
+/* Status Badge */
+
+.availablee-status{
+
+    display:inline-block;
+
+    background:#ecfdf3;
+
+    color:#027a48;
+
+    font-size:12px;
+
+    font-weight:600;
+
+    padding:6px 12px;
+
+    border-radius:30px;
+}
+
+/* Buttons */
+
+.sam-appointment-card .btn{
+
+    min-width:90px;
+
+    border-radius:10px;
+
+    font-size:13px;
+
+    font-weight:600;
+}
+
+/* Card Top Highlight */
+
+.sam-appointment-card .table tr{
+
+    position:relative;
+}
+
+.sam-appointment-card .table tr::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:4px;
+
+    background:linear-gradient(
+        90deg,
+        #0d6efd,
+        #20c997
+    );
+}
+
+}
+option[value="pending"], .status-pending {
+    color: #ffc107; /* Yellow */
+    /* text-decoration: ; */
+    font-weight: bold;
+}
+
+option[value="in_consultation"], .status-confirmed{
+    color: #0d6efd; /* Blue */
+     font-weight: bold;
+}
+
+option[value="completed"], .status-completed {
+    color: #198754; /* Green */
+     font-weight: bold;
+}
+
+option[value="cancelled"], .status-cancelled {
+    color: #dc3545; /* Red */
+     font-weight: bold;
+}
+/*Paitent Appointment add popup code start*/
+
+
+        /* RESET & VARIABLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        :root {
+            --clindash-bg: #f8faff;
+            --clindash-card-bg: #ffffff;
+            --clindash-primary: #1e62ec;
+            --clindash-success: #2ecc71;
+            --clindash-warning: #e67e22;
+            --clindash-danger: #e74c3c;
+            --clindash-text-dark: #2c3e50;
+            --clindash-text-light: #7f8c8d;
+            --clindash-border: #edf2f7;
+            --clindash-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            --clindash-radius: 12px;
+        }
+
+        body {
+            background-color: var(--clindash-bg);
+            color: var(--clindash-text-dark);
+            padding: 12px;
+            /* ..display: flex; */
+            justify-content: center;
+        }
+
+        @media (min-width: 768px) {
+            body { padding: 24px; }
+        }
+
+        /* MAIN CONTAINER */
+        .clindash-container {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        @media (min-width: 768px) {
+            .clindash-container { gap: 24px; }
+        }
+
+        @media (max-width: 500px) {
+            .clindash-main-grid {
+                display: inline !important;
+            }
+        }
+
+        /* TOP STATS ROW (Responsive Grid) */
+        .clindash-top-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Mobile: 2 columns */
+            gap: 12px;
+        }
+
+        @media (min-width: 576px) {
+            .clindash-top-stats { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+        }
+
+        .clindash-stat-card {
+            background: var(--clindash-card-bg);
+            padding: 16px;
+            border-radius: var(--clindash-radius);
+            box-shadow: var(--clindash-shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 130px;
+        }
+
+        .clindash-stat-icon-wrapper {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .clindash-icon-blue { background: #eaf2ff; color: #1e62ec; }
+        .clindash-icon-green { background: #e8f8f0; color: #2ecc71; }
+        .clindash-icon-pink { background: #ffeaf3; color: #e91e63; }
+        .clindash-icon-book { background: #f0fdf4; color: #16a34a; border: 1px dashed #bbf7d0; }
+
+        .clindash-stat-title {
+            font-size: 12px;
+            color: var(--clindash-text-light);
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        .clindash-stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+
+        .clindash-stat-link {
+            font-size: 11px;
+            color: var(--clindash-primary);
+            text-decoration: none;
+            margin-top: 8px;
+            display: inline-block;
+            font-weight: 500;
+        }
+
+        .clindash-book-btn-card {
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            border: 2px dashed #cbd5e1;
+        }
+
+        .clindash-book-text {
+            font-weight: 600;
+            font-size: 13px;
+            margin-top: 6px;
+        }
+
+        /* MIDDLE SECTION GRID */
+        .clindash-main-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Default Mobile: Single Column */
+            gap: 16px;
+        }
+
+        @media (min-width: 992px) {
+            .clindash-main-grid {
+                grid-template-columns: 360px 1fr; /* Desktop: Split View */
+                gap: 24px;
+            }
+        }
+
+        /* CURRENT TOKEN PANEL */
+        .clindash-token-card {
+            background: var(--clindash-card-bg);
+            border-radius: var(--clindash-radius);
+            box-shadow: var(--clindash-shadow);
+            padding: 16px;
+        }
+        
+        @media (min-width: 768px) {
+            .clindash-token-card { padding: 24px; }
+        }
+
+        .clindash-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .clindash-card-title {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .clindash-counter-badge {
+            background: #f1f5f9;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #64748b;
+        }
+
+        .clindash-token-display {
+            text-align: center;
+            padding: 16px 8px;
+            border: 1px solid var(--clindash-border);
+            border-radius: var(--clindash-radius);
+            margin-bottom: 16px;
+            background: #fafbfc;
+        }
+
+        .clindash-serving-label {
+            font-size: 11px;
+            color: var(--clindash-text-light);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .clindash-token-number {
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--clindash-primary);
+            margin: 4px 0;
+        }
+
+        .clindash-patient-name {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .clindash-doctor-name {
+            font-size: 13px;
+            color: var(--clindash-text-light);
+        }
+
+        .clindash-next-token-bar {
+            margin-top: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            border-top: 1px dashed var(--clindash-border);
+            padding-top: 10px;
+        }
+
+        /* BUTTON ACTIONS (Fully Responsive Layout) */
+        .clindash-action-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 Columns on Mobile */
+            gap: 8px;
+        }
+
+        .clindash-btn {
+            padding: 10px 6px;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        /* Full width for major primary actions on mobile */
+        .clindash-btn-full-mobile {
+            grid-column: span 2;
+        }
+
+        .clindash-btn-complete { background: #10b981; color: white; }
+        .clindash-btn-next { background: #2563eb; color: white; }
+        .clindash-btn-outline { background: white; border: 1px solid #cbd5e1; color: #475569; }
+        .clindash-btn-cancel { background: white; border: 1px solid #fee2e2; color: #ef4444; }
+
+        /* QUEUE TABLE PANEL */
+        .clindash-queue-card {
+            background: var(--clindash-card-bg);
+            border-radius: var(--clindash-radius);
+            box-shadow: var(--clindash-shadow);
+            padding: 16px;
+        }
+        
+        @media (min-width: 768px) {
+            .clindash-queue-card { padding: 24px; }
+        }
+
+        /* Horizontal Scroll for Table on Small Screens */
+        .clindash-table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
+        }
+
+        .clindash-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            min-width: 450px; /* Forces table shape without breaking layouts */
+        }
+
+        .clindash-table th {
+            padding: 10px 12px;
+            color: #64748b;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--clindash-border);
+        }
+
+        .clindash-table td {
+            padding: 12px;
+            border-bottom: 1px solid var(--clindash-border);
+            font-size: 13px;
+        }
+
+        .clindash-table-token { font-weight: 600; color: #0f172a; }
+        
+        /* STATUS BADGES */
+        .clindash-badge {
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .clindash-badge-completed { background: #dcfce7; color: #15803d; }
+        .clindash-badge-consultation { background: #e0f2fe; color: #0369a1; }
+        .clindash-badge-waiting { background: #ffedd5; color: #c2410c; }
+
+        /* BOTTOM OVERVIEW ROW (Responsive) */
+        .clindash-bottom-overview {
+            display: grid;
+            grid-template-columns: 1fr; /* Mobile: Single column stack */
+            gap: 12px;
+        }
+
+        @media (min-width: 576px) {
+            .clindash-bottom-overview {
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            }
+        }
+
+        .clindash-overview-card {
+            background: var(--clindash-card-bg);
+            padding: 16px;
+            border-radius: var(--clindash-radius);
+            box-shadow: var(--clindash-shadow);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .clindash-overview-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #f0f5ff;
+            color: var(--clindash-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0; /* Prevents icon deformation */
+        }
+
+        .clindash-overview-info h3 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .clindash-overview-info p {
+            font-size: 12px;
+            color: var(--clindash-text-light);
+        }
+
+        .clindash-trend-up {
+            color: var(--clindash-success);
+            font-size: 12px;
+        }
+/******** clinic Dashboard********/
+ /*==================================================
+            MY MAIN CLINIC DASHBOARD
+==================================================*/
+
+        /* * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        } */
+
+        /* body {
+            background: #f4f7fc;
+            font-family: "Segoe UI", sans-serif;
+            color: #1f2937;
+        } */
+
+        /*==========================
+Container
+==========================*/
+
+        .mymaincliniccontainer {
+            padding: 35px;
+            padding-bottom: 120px;
+        }
+
+        /*==========================
+Header
+==========================*/
+
+        .mymainclinicheader {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .mymainclinicheader h2 {
+            font-size: 30px;
+            font-weight: 700;
+            color: #1d3557;
+            margin-bottom: 6px;
+        }
+
+        .mymainclinicheader p {
+            color: #6b7280;
+            font-size: 15px;
+        }
+
+        /*==========================
+Token Panel
+==========================*/
+
+        .mymainclinictokenpanel {
+            background: #ffffff;
+            border-radius: 22px;
+            padding: 24px;
+            box-shadow: 0 15px 40px rgba(30, 64, 175, 0.08);
+            height: 100%;
+        }
+
+        .mymainclinictitle {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1d3557;
+        }
+
+        /*==========================
+Serving Card
+==========================*/
+
+        .mymainclinicservingcard,
+        .mymainclinicnextcard {
+            border-radius: 18px;
+
+            padding: 25px;
+
+            text-align: center;
+
+            transition: 0.35s;
+
+            margin-bottom: 20px;
+        }
+
+        .mymainclinicservingcard {
+            /* background: linear-gradient(135deg, #2563eb, #4f8cff); */
+
+            color: #fff;
+        }
+        .mymainclinicservingcard.doctor-card-purple {
+            background: linear-gradient(135deg, #5f00ff, #7b4dff);
+        }
+
+        .mymainclinicservingcard.doctor-card-blue {
+            background: linear-gradient(135deg, #0066ff, #00a8ff);
+        }
+
+        .mymainclinicservingcard.doctor-card-green {
+            background: linear-gradient(135deg, #009688, #20c997);
+        }
+
+        .mymainclinicservingcard.doctor-card-orange {
+            background: linear-gradient(135deg, #ff6b00, #ff9d42);
+        }
+
+        .mymainclinicservingcard.doctor-card-pink {
+            background: linear-gradient(135deg, #e83e8c, #ff6f91);
+        }
+
+        .mymainclinicservingcard.doctor-card-teal {
+            background: linear-gradient(135deg, #008b8b, #20c9c9);
+        }
+
+        .mymainclinicservingcard.doctor-card-red {
+            background: linear-gradient(135deg, #e53935, #ff6b6b);
+        }
+
+        .mymainclinicservingcard.doctor-card-indigo {
+            background: linear-gradient(135deg, #3949ab, #7986cb);
+        }
+
+        .mymainclinicnextcard {
+            background: #f8fbff;
+
+            border: 2px dashed #dbeafe;
+        }
+
+        .mymainclinicservingcard:hover,
+        .mymainclinicnextcard:hover {
+            transform: translateY(-5px);
+        }
+
+        .mymainclinicstatus {
+            display: inline-block;
+
+            padding: 6px 14px;
+
+            border-radius: 30px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 18px;
+
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .mymainclinicnextcard .mymainclinicstatus {
+            background: #e8f1ff;
+
+            color: #2563eb;
+        }
+
+        .mymainclinictokennumber {
+            font-size: 48px;
+
+            font-weight: 800;
+
+            margin-bottom: 12px;
+        }
+
+        .mymainclinicnextcard .mymainclinictokennumber {
+            color: #2563eb;
+        }
+
+        .mymainclinicpatient {
+            font-size: 22px;
+
+            font-weight: 700;
+
+            margin-bottom: 6px;
+        }
+
+        .mymainclinicdoctor {
+            font-size: 15px;
+
+            color: #e5e7eb;
+        }
+
+        .mymainclinicnextcard .mymainclinicdoctor {
+            color: #6b7280;
+        }
+
+        /*==========================
+Dashboard Cards
+==========================*/
+
+        .mymaincliniccard {
+            background: #ffffff;
+
+            border-radius: 22px;
+
+            padding: 12px;
+
+            display: flex;
+
+            gap: 18px;
+
+            align-items: center;
+
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+
+            transition: 0.35s;
+
+            height: 180px;
+        }
+
+        .mymaincliniccard:hover {
+            transform: translateY(-8px);
+
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.08);
+        }
+
+        .mymainclinicicon {
+            width: 42px;
+
+            height: 42px;
+
+            border-radius: 9px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-size: 21px;
+
+            flex-shrink: 0;
+        }
+
+        .mymainclinicblue {
+            background: #e8f1ff;
+
+            color: #2563eb;
+        }
+
+        .mymainclinicgreen {
+            background: #eafbf2;
+
+            color: #16a34a;
+        }
+
+        .mymainclinicorange {
+            background: #fff3df;
+
+            color: #f59e0b;
+        }
+
+        .mymainclinicpurple {
+            background: #f3ecff;
+
+            color: #7c3aed;
+        }
+
+        /*==========================
+Card Content
+==========================*/
+
+        .mymaincliniccontent {
+            flex: 1;
+        }
+
+        .mymainclinictop {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 28px;
+        }
+
+        .mymainclinictop h3 {
+            font-size: 14px;
+
+            font-weight: 700;
+
+            color: #1f2937;
+
+            margin: 0;
+        }
+
+        .mymainclinictop h1 {
+            font-size: 25px;
+
+            font-weight: 800;
+
+            color: #2563eb;
+
+            margin: 0;
+        }
+
+        .mymainclinicbottom {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+        .mymainclinicbottom span {
+            font-size: 14px;
+
+            color: #6b7280;
+        }
+
+        .mymainclinicbottom a {
+            text-decoration: none;
+
+            font-weight: 500;
+
+            color: #2563eb;
+
+            transition: 0.3s;
+        }
+
+        .mymainclinicbottom a:hover {
+            color: #1d4ed8;
+        }
+
+        /*==========================
+Floating Button
+==========================*/
+
+        .mymainclinicbookbtn {
+            position: fixed;
+
+            right: 25px;
+
+            bottom: 25px;
+
+            background: #2563eb;
+
+            color: #fff;
+
+            border: none;
+
+            border-radius: 50px;
+
+            padding: 15px 28px;
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            box-shadow: 0 18px 40px rgba(37, 99, 235, 0.35);
+
+            transition: 0.3s;
+
+            z-index: 999;
+        }
+
+        .mymainclinicbookbtn:hover {
+            background: #1d4ed8;
+
+            transform: translateY(-4px);
+        }
+
+        .mymainclinicbookbtn i {
+            margin-right: 8px;
+        }
+
+        /*==========================
+Responsive
+==========================*/
+
+@media (max-width:600px){
+
+.dflexmob{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:12px;
+
+overflow: scroll;
+
+}
+
+}
+
+.mymainclinicservingcard{
+
+width:100%;
+
+}
+
+.dflexmob:has(.mymainclinicservingcard:only-child){
+
+grid-template-columns:1fr;
+
+}
+
+
+        @media (max-width: 600px) {
+            /*.dflexmob{
+                display: flex;
+            }*/
+            .mymainclinictokennumber {
+                font-size: 21px !important;
+            }
+            .mymainclinicservingcard, .mymainclinicnextcard{
+                padding: 10px;
+            }
+            .mymainclinicpatient {
+                font-size: 15px !important;
+            }
+            .mymainclinictokenpanel {
+                margin-bottom: 0px;
+                padding: 12px;
+            }
+            .mymainclinicservingcard{
+                margin: 5px;
+                width: max-content;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .mymainclinictokenpanel {
+                margin-bottom: 25px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .mymaincliniccontainer {
+                padding: 18px;
+                padding-bottom: 100px;
+            }
+
+            .mymainclinicheader {
+                margin-bottom: 20px;
+            }
+
+            .mymainclinicheader h2 {
+                font-size: 19px;
+            }
+
+            .mymaincliniccard {
+                height: auto;
+
+                padding: 20px;
+            }
+
+            .mymainclinicservingcard p{
+                margin-bottom: 2px;
+            }
+
+            .mymainclinicstatus{
+                margin-bottom: 5px;
+            }
+
+            .mymainclinicicon {
+                width: 58px;
+
+                height: 58px;
+
+                font-size: 22px;
+            }
+
+            .mymainclinictop {
+                margin-bottom: 18px;
+            }
+
+            .mymainclinictop h3 {
+                font-size: 16px;
+            }
+
+            .mymainclinictop h1 {
+                font-size: 16px;
+            }
+
+            .mymainclinictokennumber {
+                font-size: 38px;
+            }
+
+            .mymainclinicpatient {
+                font-size: 20px;
+            }
+
+            .mymainclinicbookbtn {
+                left: 15px;
+
+                right: 15px;
+
+                width: calc(100% - 30px);
+
+                bottom: 15px;
+
+                border-radius: 14px;
+
+                text-align: center;
+            }
+        }
+
+        /*==========================================
+        PREMIUM EFFECTS
+==========================================*/
+
+        .mymainclinicclock {
+            background: #ffffff;
+
+            padding: 10px 18px;
+
+            border-radius: 12px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            color: #2563eb;
+
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Live Dot */
+
+        .mymainclinicstatus::before {
+            content: "";
+
+            width: 10px;
+
+            height: 10px;
+
+            border-radius: 50%;
+
+            background: #00ff7b;
+
+            display: inline-block;
+
+            margin-right: 8px;
+
+            animation: mymaincliniclive 1.3s infinite;
+        }
+
+        @keyframes mymaincliniclive {
+            0% {
+                transform: scale(1);
+
+                box-shadow: 0 0 0 0 rgba(0, 255, 123, 0.6);
+            }
+
+            70% {
+                transform: scale(1.3);
+
+                box-shadow: 0 0 0 10px rgba(0, 255, 123, 0);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Card Animation */
+
+        .mymaincliniccard {
+            animation: mymainclinicfade 0.6s ease;
+        }
+
+        @keyframes mymainclinicfade {
+            from {
+                opacity: 0;
+
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform: translateY(0);
+            }
+        }
+
+        /* Token Glow */
+
+        .mymainclinicservingcard {
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .mymainclinicservingcard::after {
+            content: "";
+
+            position: absolute;
+
+            top: -50%;
+
+            left: -60%;
+
+            width: 40%;
+
+            height: 200%;
+
+            background: rgba(255, 255, 255, 0.18);
+
+            transform: rotate(25deg);
+
+            animation: mymainclinicshine 5s infinite;
+        }
+
+        @keyframes mymainclinicshine {
+            0% {
+                left: -70%;
+            }
+
+            100% {
+                left: 160%;
+            }
+        }
+
+        /* View Button */
+
+        .mymainclinicbottom a {
+            padding: 7px 5px;
+            border-radius: 10px;
+            background: #edf4ff;
+            transition: 0.35s;
+            width: 72%;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .mymainclinicbottom a:hover {
+            background: #2563eb;
+
+            color: #fff !important;
+        }
+
+        /* Floating Button */
+
+        .mymainclinicbookbtn {
+            overflow: hidden;
+
+            position: fixed;
+        }
+
+        .mymainclinicbookbtn::after {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+
+            left: -100%;
+
+            width: 100%;
+
+            height: 100%;
+
+            background: rgba(255, 255, 255, 0.25);
+
+            transition: 0.5s;
+        }
+
+        .mymainclinicbookbtn:hover::after {
+            left: 100%;
+        }
+
+        /*====================================
+Skip Button
+====================================*/
+
+.mymainclinicskipbtn{
+
+    background:#fff7e6;
+    color:#d97706;
+    border:1px solid #fbbf24;
+    border-radius:10px;
+    font-size:13px;
+    font-weight:600;
+    padding:8px 16px;
+    transition:.3s ease;
+    box-shadow:0 4px 10px rgba(251,191,36,.15);
+
+}
+
+.mymainclinicskipbtn:hover{
+
+    background:#f59e0b;
+    color:#fff;
+    border-color:#f59e0b;
+    transform:translateY(-2px);
+
+}
+
+.mymainclinicskipbtn i{
+
+    margin-right:6px;
+
+}
+
+
+/*====================================
+Complete Button
+====================================*/
+
+.mymaincliniccompletebtn{
+
+    background:#ecfdf5;
+    color:#059669;
+    border:1px solid #34d399;
+    border-radius:10px;
+    font-size:13px;
+    font-weight:600;
+    padding:8px 16px;
+    transition:.3s ease;
+    box-shadow:0 4px 10px rgba(52,211,153,.15);
+
+}
+
+.mymaincliniccompletebtn:hover{
+
+    background:#10b981;
+    color:#fff;
+    border-color:#10b981;
+    transform:translateY(-2px);
+
+}
+
+.mymaincliniccompletebtn i{
+
+    margin-right:6px;
+
+}
+
+
+/*====================================
+Mobile
+====================================*/
+
+@media(max-width:576px){
+
+    .mymainclinicskipbtn,
+    .mymaincliniccompletebtn{
+
+        width:100%;
+        margin-top:8px;
+
+    }
+
+}
+/******** clinic Dashboard********/
+
+.inputday {
+    transition: all 0.3s ease;
+   }
+
+   .inputday.off-day {
+    opacity: 0;
+    filter: blur(4px);
+    pointer-events: none;
+    max-height: 0;
+    overflow: hidden;
+    margin-top: 0 !important;
+    transform: scaleY(0.95);
+   }
