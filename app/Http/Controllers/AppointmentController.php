@@ -175,7 +175,7 @@ class AppointmentController extends Controller
               'shift_time'  => $request->shift_time,
               'appointment_time'  => $request->appointment_time,
               'token_number' => $tokenNumber,
-              'appointment_fee' => $doctor->consultation_fee
+              'consultation_fee' => $doctor->consultation_fee
           ]);
           PatientVital::create([
             'patient_id'     => $patient->id,

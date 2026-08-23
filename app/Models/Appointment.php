@@ -27,7 +27,7 @@ class Appointment extends Model
         'prescription',
         'test_recommended',
         'notes',
-        'appointment_fee'
+        'consultation_fee'
     ];
     public function patient()
     {
