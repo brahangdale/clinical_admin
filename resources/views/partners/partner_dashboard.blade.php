@@ -1,534 +1,171 @@
-@extends('layouts.main')
-@section('main-container')
-<!-- <div class="sam-dashboard-main"> -->
-      <div class="sam-clinic-header">
-        <div>
-          <h3 class="sam-clinic-title">Clinics Management</h3>
-          <p class="text-muted mb-0">
-            Manage all clinics and hospitals
-          </p>
-        </div>
-
-        <button class="btn sam-clinic-add-btn" data-bs-toggle="modal" data-bs-target="#samAddClinicModal">
-          <i class="fa-solid fa-plus"></i>Add New Clinic
-        </button>
-
-        <!-- Add Clinic Modal -->
-        <div class="modal fade" id="samAddClinicModal" tabindex="-1">
-          <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content sam-clinic-modal">
-              <!-- Header -->
-              <div class="modal-header">
-                <h5 class="modal-title">
-                  <i class="fa-solid fa-hospital me-2"></i>Add New Clinic
-                </h5>
-                <button type="reset" class="btn-close" data-bs-dismiss="modal"></button>
+@extends('layouts.partner_layout')
+@section('partner_layout-container')
+  <!-- =========================================================
+      VIEW CLINIC MODAL
+  ========================================================= -->
+  @foreach($partner_clinic as $clinic)
+    <div class="modal fade partner-info-modal" id="partnerClinicInfoModal{{ $clinic->id }}" tabindex="-1"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="partner-info-header">
+            <div class="partner-info-heading">
+              <div class="partner-info-icon">
+                <i class="fa-solid fa-hospital"></i>
               </div>
-              <!-- Body -->
-
-              <div class="modal-body">
-                <form id="samClinicForm" action="{{ route('partners.store_clinic') }}" method="post">
-                  @csrf
-                  <input type="hidden" name="modal_id" value="samAddClinicModal">
-                  <div class="row">
-
-                    <div class="col-md-6 mb-3">
-                      <label class="form-label">Clinic Name *</label>
-                      <input type="text" name="clinic_name"  value="{{ old('clinic_name') }}" class="form-control sam-clinic-input" placeholder="Enter Clinic Name">
-                      <span class="text-danger">
-                        @error('clinic_name')
-                          <small>{{ $message }}</small> 
-                        @enderror
-                      </span>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                      <label class="form-label">User Name *</label>
-                      <input type="text" name="user_name" value="{{ old('user_name') }}" class="form-control sam-clinic-input" placeholder="Enter Owner Name">
-                      <span class="text-danger">
-                        @error('user_name')
-                          <small>{{ $message }}</small> 
-                        @enderror
-                      </span>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                      <label class="form-label">Mobile Number *</label>
-                      <input type="number" name="mobile_number" value="{{ old('mobile_number') }}" class="form-control sam-clinic-input" placeholder="Enter Mobile">
-                      <span class="text-danger">
-                        @error('mobile_number')
-                          <small>{{ $message }}</small> 
-                        @enderror
-                      </span>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                      <label class="form-label">Email Address</label>
-                      <input type="email" name="email" value="{{ old('email') }}" class="form-control sam-clinic-input" placeholder="Enter Email">
-                      <span class="text-danger">
-                        @error('email')
-                          <small>{{ $message }}</small> 
-                        @enderror
-                      </span>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                      <label class="form-label">City</label>
-                      <input type="text" name="city" value="{{ old('city') }}" class="form-control sam-clinic-input" placeholder="Enter City">
-                      
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                      <label class="form-label">State</label>
-                      <input type="text" name="state" value="{{ old('state') }}" class="form-control sam-clinic-input" placeholder="Enter State">
-                    </div>
-
-                    <div class="col-12 mb-3">
-                      <label class="form-label">Address</label>
-                      <textarea rows="3", name="address" class="form-control sam-clinic-input" placeholder="Enter Address">{{ old('address') }}</textarea>
-                    </div>
-
-                    <div class="col-md-6">
-                      <label class="form-label">Status</label>
-                      <select class="form-select sam-clinic-input" name="status">
-                        <option value="0" selected>Inactive</option>
-                        <option value="1" >Active</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="reset" class="btn btn-light" data-bs-dismiss="modal">
-                      Cancel
-                    </button>
-                    <button type="submit" class="btn btn-primary">Save Clinic</button>
-                  </div>
-                </form>
+              <div>
+                <h6 id="infoClinicName">
+                  {{ $clinic->clinic_name }}
+                </h6>
+                <small>Clinic Information</small>
+              </div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="partner-info-body">
+            <div class="partner-info-grid">
+              <div class="partner-info-item">
+                <span>Clinic Name</span>
+                <strong id="infoClinicName2">{{ $clinic->clinic_name }}</strong>
+              </div>
+              <div class="partner-info-item">
+                <span>Status</span>
+                  @if($clinic->user?->status == 1)
+                  <strong id="infoClinicStatus"style="color:#15803d;">Active</strong>
+                  @else
+                  <strong id="infoClinicStatus"style="color:#e70946;">Inctive</strong>
+                  @endif
+              </div>
+              <div class="partner-info-item">
+                <span>Phone Number</span>
+                <strong id="infoClinicPhone"> +91 {{ $clinic->mobile_number }}</strong>
+              </div>
+              <div class="partner-info-item">
+                <span>Created Date</span>
+                <strong id="infoClinicDate">{{ $clinic->created_at }}</strong>
+              </div>
+              <div class="partner-info-item full">
+                <span>Clinic Address</span>
+                <strong id="infoClinicAddress">
+                  {{ $clinic->address }}, {{ $clinic->city }},
+                  {{ $clinic->state }}
+                </strong>
               </div>
             </div>
           </div>
-        </div>
-
-        <!-- after save clinic info -->
-        <!-- @if(session('success'))
-          <div class="modal fade" id="samCredentialModal" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-
-                <div class="modal-header">
-                  <h5 class="modal-title">
-                    Clinic Created Successfully
-                  </h5>
-                </div>
-
-                <div class="modal-body">
-                  <p><strong>Username:</strong>
-                  {{ session('username') }}
-                  </p>
-                  <p><strong>Password:</strong>
-                    {{ session('password') }}
-                  </p>
-                  <p><strong>Admin URL:</strong>
-                    yourdomain.com/admin
-                  </p>
-                  <p><strong>Clinic Website URL:</strong>
-                    yourdomain.com/clinicname
-                  </p>
-                </div>
-
-                <div class="modal-footer">
-                  <button class="btn btn-primary" data-bs-dismiss="modal">
-                    Copy Credentials
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        @endif -->
-        <!-- after save clinic info end -->
-      </div>
-
-      <!-- SEARCH -->
-
-      <div class="sam-clinic-card">
-        <div class="row">
-          <div class="col-lg-4">
-            <form method="GET" action="{{ route('clinical_admins.index') }}">
-              <input type="text" name="search" class="form-control sam-clinic-search"
-              placeholder="Search Clinic" value="{{ request('search') }}">
-              <button type="submit" class="btn btn-primary">search</button>
-            </form>
+          <div class="partner-info-footer">
+            <button type="button" class="partner-modal-close" data-bs-dismiss="modal">
+              Close
+            </button>
           </div>
         </div>
       </div>
-
-      <!-- Content -->
-
-      <div class="sam-dashboard-content">
-        <div class="row g-4 mt-1">
-          <div class="col-lg-4">
-            <div class="sam-clinic-stats-card">
-              <h6>Total Clinics</h6>
-              <h2>23</h2>
-            </div>
-          </div>
-
-          <div class="col-lg-4">
-            <div class="sam-clinic-stats-card">
-              <h6>Active Clinics</h6>
-              <h2>44</h2>
-            </div>
-          </div>
-
-          <div class="col-lg-4">
-            <div class="sam-clinic-stats-card">
-              <h6>Inactive Clinics</h6>
-              <h2>11</h2>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Recent Clinics -->
-
-        <div class="sam-clinic-card mt-4">
-          <div class="table-responsive">
-            <table class="table align-middle sam-clinic-table">
-              <thead>
-                <tr>
-                  <th>Clinic Name</th>
-                  <th>Owner</th>
-                  <th>Mobile</th>
-                  
-                  <th>Status</th>
-                  <th>Created</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                @forelse($partners as $clinic)
-                  <tr id="row-{{ $clinic->id }}">
-                    <td>
-                      <strong>{{$clinic->clinic_name}}</strong>
-                    </td>
-                    <td>{{ $clinic->user?->user_name }}</td>
-                    <td>{{$clinic?->mobile_number}}</td>
-                    
-                    <td class="status-text"> 
-                      @if($clinic->user?->status == 1)
-                        <span class="badge bg-success">Active</span>
-                      @else
-                        <span class="badge bg-danger">Inactive</span>
-                      @endif
-                    </td>
-                    <td>
-                      {{ $clinic->created_at->format('d-M-Y') }}
-                    </td>
-                    <td>
-                      <button class="btn btn-sm btn-primary" data-bs-toggle="offcanvas" data-bs-target="#samClinicViewOffcanvas{{ $clinic->id }}">
-                        View
-                      </button>
-                      <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#samEditClinicModal{{ $clinic->id }}">
-                        Edit
-                      </button>
-                      @if($clinic->user?->status == 1)
-                          <button class="btn btn-sm btn-danger toggle-clinic"
-                                  data-id="{{ $clinic->id }}">
-                              Disable
-                          </button>
-                      @else
-                          <button class="btn btn-sm btn-success toggle-clinic"
-                                  data-id="{{ $clinic->id }}">
-                              Enable
-                          </button>
-                      @endif
-                    </td>
-                  </tr>
-                @empty
-                  <tr>
-                    <td colspan="6" class="text-center">No Clinics Found</td>
-                  </tr>
-                @endforelse
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="d-flex justify-content-end mt-3">
-         
-        </div>
-      </div>
-    <!-- </div> -->
-
-    <!-- offcanvas and model code view and edit btn start -->
-     @foreach($partners as $clinic)  
-      <div class="offcanvas offcanvas-end" tabindex="-1" id="samClinicViewOffcanvas{{ $clinic->id }}">
-        <div class="offcanvas-header">
-          <h5 class="offcanvas-title">Clinic Details</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-        </div>
-        <div class="offcanvas-body">
-          <div class="sam-clinic-view-section">
-            <h6>Clinic Information</h6>
-            <table class="table">
-              <tr>
-                <th>Clinic Name</th>
-                <td>{{$clinic->clinic_name}}</td>
-              </tr>
-
-              <tr>
-                  <th>Owner</th>
-                  <td>{{$clinic->user?->user_name}}</td>
-              </tr>
-
-              <tr>
-                  <th>Mobile</th>
-                  <td>{{$clinic->mobile_number}}</td>
-              </tr>
-
-              <tr>
-                  <th>Email</th>
-                  <td>{{ $clinic->user?->email }}</td>
-              </tr>
-
-              <tr>
-                  <th>Status</th>
-                  <td>
-                    @if($clinic->user?->status == 1)
-                      <span class="badge bg-success">Active</span>
-                    @else
-                      <span class="badge bg-danger">Inactive</span>
-                    @endif
-                  </td>
-              </tr>
-            </table>
-          </div>
-          <hr>
-          <div class="sam-clinic-view-section">
-
-            <h6>Admin Credentials</h6>
-
-            <table class="table">
-
-                <tr>
-                    <th>Username</th>
-                    <td>{{$clinic->user?->user_name}}</td>
-                </tr>
-
-                <tr>
-                    <th>Password</th>
-                    <td>{{$clinic->user?->password}}td>
-                </tr>
-
-                <tr>
-                    <th>Admin URL</th>
-                    <td>yourdomain.com/admin</td>
-                </tr>
-
-                <tr>
-                    <th>Patient URL</th>
-                    <td>yourdomain.com/akasa-clinic</td>
-                </tr>
-
-            </table>
-
-          </div>
-
-          <hr>
-
-          <div class="row g-3">
-
-                <div class="col-6">
-
-                    <div class="sam-clinic-mini-card">
-
-                        <h6>Doctors</h6>
-
-                        <h3>12</h3>
-
-                    </div>
-
-                </div>
-
-                <div class="col-6">
-
-                    <div class="sam-clinic-mini-card">
-
-                        <h6>Patients</h6>
-
-                        <h3>1250</h3>
-
-                    </div>
-
-                </div>
-
-                <div class="col-6">
-
-                    <div class="sam-clinic-mini-card">
-
-                        <h6>Appointments</h6>
-
-                        <h3>4560</h3>
-
-                    </div>
-
-                </div>
-
-                <div class="col-6">
-
-                    <div class="sam-clinic-mini-card">
-
-                        <h6>Receptionists</h6>
-
-                        <h3>4</h3>
-
-                    </div>
-
-                </div>
-
-          </div>
-        </div>
-      </div>
-      <!-- edit module start -->
-      <div class="modal fade" id="samEditClinicModal{{ $clinic->id }}" tabindex="-1">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Edit Clinic</h5>
-              <button class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-
-            <div class="modal-body">
-              <form  action="{{ route('clinical_admins.update', $clinic->id) }}" method="POST">
-                @csrf
-                @method('PUT')
-                <input type="hidden" name="modal_id" value="samEditClinicModal{{ $clinic->id }}">
-                <div class="row">
-                  <div class="col-md-6 mb-3">
-                    <label class="form-label"> Clinic Name </label>
-                    <input type="text" name="clinic_name" class="form-control"  value="{{ old('clinic_name', $clinic->clinic_name) }}">
-                      <span class="text-danger">
-                        @error('clinic_name')
-                          <small>{{ $message }}</small> 
-                        @enderror
-                      </span>
-                  </div>
-
-                  <div class="col-md-6 mb-3">
-                    <label class="form-label"> Owner Name</label>
-                    <input type="text", name="user_name"
-                      class="form-control" value="{{ $clinic->user?->user_name }}">
-                      <span class="text-danger">
-                        @error('user_name')
-                          <small>{{ $message }}</small> 
-                        @enderror
-                      </span>
-                    </div>
-
-                  <div class="col-md-6 mb-3">
-                    <label class="form-label">Mobile Number</label>
-                    <input type="text", name="mobile_number" class="form-control"
-                      value="{{ $clinic->mobile_number }}">
-                      <span class="text-danger">
-                        @error('mobile_number')
-                          <small>{{ $message }}</small> 
-                        @enderror
-                      </span>  
-                  </div>
-
-                  <div class="col-md-6 mb-3">
-
-                      <label class="form-label">
-                          Email
-                      </label>
-
-                      <input
-                      type="email" name="email"
-                      class="form-control"
-                      value="{{ $clinic->user?->email }}">
-                      <span class="text-danger">
-                        @error('email')
-                          <small>{{ $message }}</small> 
-                        @enderror
-                      </span> 
-                  </div>
-
-                  <div class="col-md-6 mb-3">
-
-                      <label class="form-label">
-                          City
-                      </label>
-
-                      <input
-                      type="text" name="city"
-                      class="form-control"
-                      value="{{ $clinic->city }}">
-
-                  </div>
-
-                  <div class="col-md-6 mb-3">
-
-                      <label class="form-label">
-                          State
-                      </label>
-
-                      <input
-                      type="text", name="state"
-                      class="form-control"
-                      value="{{ $clinic->state }}">
-
-                  </div>
-
-                  <div class="col-12 mb-3">
-
-                      <label class="form-label">
-                          Address
-                      </label>
-
-                      <textarea
-                      class="form-control"name="address"
-                      rows="3">{{ $clinic->address }}</textarea>
-
-                  </div>
-
-                  <div class="col-md-6">
-
-                      <label class="form-label">
-                          Status
-                      </label>
-
-                      <select class="form-select" name="status">
-
-                          <option value="0"
-                              {{ $clinic->user?->status == 0 ? 'selected' : '' }}>
-                              Inactive
-                          </option>
-
-                          <option value="1"
-                              {{ $clinic->user?->status == 1 ? 'selected' : '' }}>
-                              Active
-                          </option>
-
-                      </select>
-
-                  </div>
-
-                </div>
-                <div class="modal-footer">
-                  <button class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                  <button type="submit" class="btn btn-primary">Save Changes</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    @endforeach
-
-
-    <div
-        id="page-data"
-        data-errors="{{ $errors->any() ? '1' : '0' }}"
-        data-success="{{ session('success') ? '1' : '0' }}"
-        data-modal-id="{{ old('modal_id') }}">
     </div>
+  @endforeach
+
+  <!-- =========================================================
+      VIEW CLINIC MODAL END
+  ========================================================= -->
+
+
+  <!-- =========================================================
+      ADD CLINIC MODAL
+  ===== ==================================================== -->
+  <div class="modal fade partner-add-modal" id="partnerAddClinicModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="partner-modal-header">
+            <div class="partner-modal-title">
+              Generate New Clinic
+            </div>
+            <div class="partner-modal-subtitle">
+              Create a new clinic under your partnership.
+            </div>
+          </div>
+          <form id="partnerClinicForm" action="{{ route('partners.store_clinic') }}" method="post">
+            @csrf
+            <div class="partner-modal-body">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="partner-form-label">Clinic Name *</label>
+                  <!-- <input type="text" class="partner-form-control" name="clinic_name" placeholder="Enter clinic name" required> -->
+                  <input type="text" name="clinic_name"  value="{{ old('clinic_name') }}" class="partner-form-control" placeholder="Enter Clinic Name" required>
+                  <span class="text-danger">
+                    @error('clinic_name')
+                      <small>{{ $message }}</small> 
+                    @enderror
+                  </span>
+
+                </div>
+                <div class="col-md-6">
+                  <label class="partner-form-label">
+                    Partner User Name *
+                  </label>
+                  <input type="text" name="user_name" value="{{ old('user_name') }}" class="partner-form-control" placeholder="Enter Owner Name">
+                  <span class="text-danger">
+                      @error('user_name')
+                        <small>{{ $message }}</small> 
+                      @enderror
+                    </span>
+                </div>
+                <div class="col-md-6">
+                  <label class="partner-form-label"> Mobile Number</label>
+                  <input type="number" name="mobile_number" value="{{ old('mobile_number') }}" class="partner-form-control" placeholder="Enter Mobile">
+                    <span class="text-danger">
+                      @error('mobile_number')
+                        <small>{{ $message }}</small> 
+                      @enderror
+                    </span>
+                </div>
+                <div class="col-md-6">
+                  <label class="partner-form-label"> Partner Email</label>
+                  <input type="email" name="email" value="{{ old('email') }}" class="partner-form-control" placeholder="Enter Email">
+                    <span class="text-danger">
+                      @error('email')
+                        <small>{{ $message }}</small> 
+                      @enderror
+                    </span>
+                </div>
+                <div class="col-md-6">
+                  <label class="partner-form-label">City *</label>
+                  <input type="text" class="partner-form-control" name="city" placeholder="Enter city" value="{{ old('city') }}" required>
+                </div>
+                  <div class="col-md-6 mb-3">
+                    <label class="partner-form-label">State *</label>
+                    <input type="text" name="state" value="{{ old('state') }}" class="partner-form-control" placeholder="Enter State">
+                  </div>
+
+                <div class="col-12">
+                  <label class="partner-form-label">Clinic Address *</label>
+                  <textarea class="partner-form-control" name="address"
+                        style="height:75px;padding-top:10px;resize:none;"
+                        placeholder="Enter complete clinic address"
+                        required>{{ old('address') }}
+                  </textarea>
+                </div>
+                <div class="col-md-6">
+                    <label class="partner-form-label">Status</label>
+                    <select class="partner-form-select" name="status">
+                      <option value="0" selected>Inactive</option>
+                      <option value="1" >Active</option>
+                    </select>
+                  </div>
+              </div>
+            </div>
+            <div class="partner-modal-footer">
+              <button type="button" class="partner-cancel-btn" data-bs-dismiss="modal">
+                Cancel
+              </button>
+              <button type="submit" class="partner-create-btn">
+                <i class="fa-solid fa-plus"></i>
+                  Generate Clinic
+              </button>
+            </div>
+          </form>
+        </div>
+    </div>
+  </div>
+  <!-- =========================================================
+      ADD CLINIC MODAL END
+  ========================================================= -->
 @endsection

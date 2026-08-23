@@ -26,6 +26,7 @@ Route::prefix('partner')->middleware(['auth', 'role:sub_admin'])->group(function
   Route::get('/partner_dashboard', [PartnerDashboardController::class, 'index'])
       ->name('partners.partner_dashboard');
   Route::post('/store_clinic', [PartnerDashboardController::class, 'store_clinic'])->name('partners.store_clinic');
+  Route::post('/partner/clinic-performance',[PartnerDashboardController::class, 'clinicPerformance'])->name('partner.clinic.performance');
 });
 Route::prefix('clinical_admins')->middleware(['auth', 'role:clinic_admin'])->group(function () {        
     Route::get('/clinic_dashboard', [ClinicalDashboardController::class, 'index'])
