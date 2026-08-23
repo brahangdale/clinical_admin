@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Hash;
 class PartnerDashboardController extends Controller
 {
   public function index()
-{
+  {
     $partner_id = auth()->user()->partner_id;
 
     $partner_clinic = ClinicalAdmin::with('user')
@@ -56,10 +56,10 @@ class PartnerDashboardController extends Controller
         $clinic->partner_payment =
         $clinic->today_revenue * 0.10;
     }
-
+    $clinics_count = ClinicalAdmin::where('partner_id', $partner_id)->count();
     return view(
         'partners.partner_dashboard',
-        compact('partner_clinic')
+        compact('partner_clinic', 'clinics_count')
     );
 }
 

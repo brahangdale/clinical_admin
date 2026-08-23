@@ -344,7 +344,7 @@
 
                         <h6>Doctors</h6>
 
-                        <h3>12</h3>
+                        <h3>{{ $clinic->doctors_count }}</h3>
 
                     </div>
 
@@ -356,7 +356,7 @@
 
                         <h6>Patients</h6>
 
-                        <h3>1250</h3>
+                        <h3>{{ $clinic->appointments_count }}</h3>
 
                     </div>
 
@@ -368,13 +368,13 @@
 
                         <h6>Appointments</h6>
 
-                        <h3>4560</h3>
+                        <h3>{{ $clinic->appointments_count }}</h3>
 
                     </div>
 
                 </div>
 
-                <div class="col-6">
+                <!-- <div class="col-6">
 
                     <div class="sam-clinic-mini-card">
 
@@ -384,7 +384,7 @@
 
                     </div>
 
-                </div>
+                </div> -->
 
           </div>
         </div>

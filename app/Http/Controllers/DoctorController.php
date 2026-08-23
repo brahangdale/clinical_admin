@@ -22,7 +22,18 @@ class DoctorController extends Controller
     public function index(Request $request)
     {
       $clinics = ClinicalAdmin::all();
-      $query = Doctor::with(['clinic', 'schedules']);
+      $query = Doctor::with(['clinic', 'schedules'])->withCount([
+            // Total completed appointments
+            'appointments as total_patients_checked' => function ($query) {
+                $query->where('status', 'completed');
+            },
+
+            // Today's completed appointments
+            'appointments as today_patients_checked' => function ($query) {
+                $query->where('status', 'completed')
+                      ->whereDate('appointment_date', today());
+            },
+        ]);
       // Clinical Admin ko sirf apne clinic ke doctors dikhaye
       if (auth()->user()->role == 'clinic_admin') {
         $query->where('clinical_admin_id', auth()->user()->clinical_admin_id);
@@ -54,7 +65,7 @@ class DoctorController extends Controller
             },
         ])
         ->get();
-
+     
       $doctors = $query->latest()->paginate(5)->withQueryString();
 
       

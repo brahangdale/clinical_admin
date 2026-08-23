@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 use App\Models\ClinicalAdmin;
 use App\Models\User;
@@ -19,6 +20,10 @@ class ClinicalAdminController extends Controller
     {
       // $clinical_admins =  ClinicalAdmin::with('user')->get();
       $clinical_admins = ClinicalAdmin::with('user')
+      ->withCount([
+            'doctors',
+            'appointments',
+        ])
       ->when($request->search, function ($query) use ($request) {
           $query->where(
               'clinic_name',
@@ -28,6 +33,17 @@ class ClinicalAdminController extends Controller
       })
       ->latest()
       ->paginate(5)->withQueryString();
+      // Unique Patients count clinic-wise
+    foreach ($clinical_admins as $clinic) {
+
+        $clinic->patients_count = Appointment::where(
+            'clinical_admin_id',
+            $clinic->id
+        )
+        ->whereNotNull('patient_id')
+        ->distinct('patient_id')
+        ->count('patient_id');
+    }
       $total_clinics = ClinicalAdmin::count();
       $inactive_clinics = User::where('role', 'clinic_admin')
                       ->where('status', 0)

@@ -34,7 +34,7 @@
   ========================================================= -->
   <div class="partner-section-header">
     <h6>Clinics</h6>
-    <span>8 Clinics</span>
+    <span>{{ $clinics_count }} Clinics</span>
   </div>
   <!-- =========================================================
      CLINIC LIST
