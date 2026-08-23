@@ -2103,7 +2103,7 @@ textarea{
         </div>
 
 
-        <button
+        <!-- <button
             class="partner-logout-btn"
             onclick="partnerLogout()">
 
@@ -2113,7 +2113,15 @@ textarea{
                 Logout
             </span>
 
-        </button>
+        </button> -->
+        <form id="logout-form" action="{{ route('logout') }}" method="POST">
+      @csrf
+    </form>
+
+    <a href="#" class="partner-logout-btn" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+      <i class="fa-solid fa-right-from-bracket"></i>
+      <span>Logout</span>
+    </a>
 
 
     </div>
