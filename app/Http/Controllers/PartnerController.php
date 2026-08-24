@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class PartnerController extends Controller
 {
@@ -121,14 +122,14 @@ class PartnerController extends Controller
     {
       // print_r($id);
       // die;
-      $clinic = Partner::findOrFail($id);
-      $user = $clinic->user();
+      $partner = Partner::findOrFail($id);
+      $user = $partner->user();
       // print_r($clinic->user);
-      $clinic->user->status = $clinic->user?->status == 0 ? 1 : 0;
-      $clinic->user->save();
+      $partner->user->status = $partner->user?->status == 0 ? 1 : 0;
+      $partner->user->save();
       
       return response()->json([
-        'status' => $clinic->user->status
+        'status' => $partner->user->status
       ]);
     }
 
@@ -151,9 +152,49 @@ class PartnerController extends Controller
     /**
      * Update the specified resource in storage.
      */
+    // public function update(Request $request, string $id)
+    // {
+    //     //
+    // }
     public function update(Request $request, string $id)
     {
-        //
+      $partner = Partner::findOrFail($id);
+        $request->validate([
+        'partner_name'   => 'required|string|max:255',
+        'user_name'     => 'required|string|max:255',
+        'mobile_number' => 'required|digits:10',
+        'city'          => 'required|string|max:100',
+        'state'         => 'required|string|max:100',
+        'address'       => 'required|string|max:500',
+
+        'email' => [
+            'required',
+            'email',
+            Rule::unique('users', 'email')->ignore($partner->user->id),
+        ],
+
+        'status' => 'required|in:0,1',
+      ]);
+      $partner->update([
+          'partner_name'   => $request->partner_name,
+          'mobile_number' => $request->mobile_number,
+          'city'          => $request->city,
+          'state'         => $request->state,
+          'address'       => $request->address,
+      ]);
+
+      if ($partner->user) {
+
+          $partner->user->update([
+              'user_name' => $request->user_name,
+              'email'     => $request->email,
+              'status'    => $request->status,
+          ]);
+      }
+
+      return redirect()
+          ->route('partners.index')
+          ->with('Partner updated successfully.');
     }
 
     /**

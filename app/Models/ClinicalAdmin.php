@@ -32,4 +32,8 @@ class ClinicalAdmin extends Model
         {
             return $this->hasMany(Appointment::class, 'clinical_admin_id');
         }
+        public function partner()
+{
+    return $this->belongsTo(Partner::class, 'partner_id');
+}
 }

@@ -7,6 +7,7 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Crypt;
 
 class User extends Authenticatable
 {
@@ -25,7 +26,8 @@ class User extends Authenticatable
         'user_name',
         'status',
         'clinical_admin_id',
-        'partner_id'
+        'partner_id',
+        'visible_password'
     ];
 
     /**
@@ -54,5 +56,14 @@ class User extends Authenticatable
     public function clinic()
     {
         return $this->belongsTo(ClinicalAdmin::class, 'clinical_admin_id');
+    }
+
+    public function getVisiblePasswordAttribute($value)
+    {
+        if (empty($value)) {
+            return null;
+        }
+
+        return Crypt::decryptString($value);
     }
 }

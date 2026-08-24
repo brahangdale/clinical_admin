@@ -199,8 +199,7 @@
                   <th>Clinic Name</th>
                   <th>Owner</th>
                   <th>Mobile</th>
-                  <th>UserName</th>
-                  <th>Password</th>
+                  <th>Partner Name</th>
                   <th>Status</th>
                   <th>Created</th>
                   <th>Actions</th>
@@ -215,8 +214,7 @@
                     </td>
                     <td>{{ $clinic->user?->user_name }}</td>
                     <td>{{$clinic?->mobile_number}}</td>
-                    <td> {{ $clinic->user?->user_name }}</td>
-                    <td> </td>
+                    <td>{{ $clinic->partner?->partner_name }}</td>
                     <td class="status-text"> 
                       @if($clinic->user?->status == 1)
                         <span class="badge bg-success">Active</span>
@@ -317,7 +315,7 @@
 
                 <tr>
                     <th>Password</th>
-                    <td>{{$clinic->user?->password}}</td>
+                    <td>{{ $clinic->user?->visible_password ?? '-' }}</td>
                 </tr>
 
                 <tr>

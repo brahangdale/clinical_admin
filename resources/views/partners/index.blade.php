@@ -198,8 +198,6 @@
                   <th>Partner Name</th>
                   <th>Owner/Username</th>
                   <th>Mobile</th>
-                  <!-- <th>UserName</th> -->
-                  <th>Password</th>
                   <th>Status</th>
                   <th>Created</th>
                   <th>Actions</th>
@@ -214,8 +212,6 @@
                     </td>
                     <td>{{ $partner->user?->user_name }}</td>
                     <td>{{$partner?->mobile_number}}</td>
-                   
-                    <td> </td>
                     <td class="status-text"> 
                       @if($partner->user?->status == 1)
                         <span class="badge bg-success">Active</span>
@@ -318,7 +314,7 @@
 
                 <tr>
                     <th>Password</th>
-                    <td>{{$partner->user?->password}}td>
+                    <td>{{$partner->user?->visible_password}}<td>
                 </tr>
 
                 <tr>
@@ -400,9 +396,18 @@
             </div>
 
             <div class="modal-body">
-              <form  action="{{ route('clinical_admins.update', $partner->id) }}" method="POST">
+              <form  action="{{ route('partners.update', $partner->id) }}" method="POST">
                 @csrf
                 @method('PUT')
+                @if($errors->any())
+                  <div class="alert alert-danger">
+                      <ul>
+                          @foreach($errors->all() as $error)
+                              <li>{{ $error }}</li>
+                          @endforeach
+                      </ul>
+                  </div>
+                @endif
                 <input type="hidden" name="modal_id" value="samEditClinicModal{{ $partner->id }}">
                 <div class="row">
                   <div class="col-md-6 mb-3">

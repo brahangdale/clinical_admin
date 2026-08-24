@@ -24,13 +24,10 @@ class AuthController extends Controller
     ]);
 
     $user = $request->only('user_name', 'password');
-    // print_r($user);
     if(Auth::attempt($user)){
-      // dd(auth()->user()->role);
       $request->session()->regenerate();
       if(Auth::check()){
         $userDetails = Auth::user();
-        // print_r($userDetails);
         Session::put('name', $userDetails->user_name);
         Session::put('userId', $userDetails->id);
        

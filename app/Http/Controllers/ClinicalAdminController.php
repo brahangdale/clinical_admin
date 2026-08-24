@@ -8,6 +8,7 @@ use App\Models\Appointment;
 use Illuminate\Http\Request;
 use App\Models\ClinicalAdmin;
 use App\Models\User;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -20,21 +21,12 @@ class ClinicalAdminController extends Controller
     {
       // $clinical_admins =  ClinicalAdmin::with('user')->get();
       $clinical_admins = ClinicalAdmin::with('user')
-      ->withCount([
-            'doctors',
-            'appointments',
-        ])
+      ->withCount(['doctors','appointments',])
       ->when($request->search, function ($query) use ($request) {
-          $query->where(
-              'clinic_name',
-              'like',
-              '%' . $request->search . '%'
-          );
-      })
-      ->latest()
-      ->paginate(5)->withQueryString();
+        $query->where('clinic_name','like','%' . $request->search . '%');
+      })->latest()->paginate(5)->withQueryString();
       // Unique Patients count clinic-wise
-    foreach ($clinical_admins as $clinic) {
+      foreach ($clinical_admins as $clinic) {
 
         $clinic->patients_count = Appointment::where(
             'clinical_admin_id',
@@ -43,7 +35,7 @@ class ClinicalAdminController extends Controller
         ->whereNotNull('patient_id')
         ->distinct('patient_id')
         ->count('patient_id');
-    }
+      }
       $total_clinics = ClinicalAdmin::count();
       $inactive_clinics = User::where('role', 'clinic_admin')
                       ->where('status', 0)
@@ -104,13 +96,14 @@ class ClinicalAdminController extends Controller
             'state'       => $request->state,
             'address'     => $request->address,
           ]);
-          // dd($clinic->id);
           // Create User
           $user = User::create([
             'clinical_admin_id' => $clinic->id,
             'user_name'      => $request->user_name,
             'email'     => $request->email,
             'password'  => Hash::make($password),
+            // Super Admin ke liye encrypted copy
+            'visible_password' => Crypt::encryptString($password),
             'status'    => $request->status ,
             'role'   => 'clinic_admin' 
           ]);
@@ -150,24 +143,6 @@ class ClinicalAdminController extends Controller
       ]);
     }
 
-
-    // public function  toggleStatus($id)
-    // {
-    //   // print_r($id);
-    //   // die;
-    //   $doctor = Doctor::findOrFail($id);
-
-    //   $doctor->status = $doctor->status == 0 ? 1 : 0;
-    //   $doctor->save();
-
-    //   // return response()->json([
-    //   //     'success' => true,
-    //   //     'status'  => $clinic->status
-    //   // ]);
-    //   return response()->json([
-    //     'status' => $doctor->status
-    // ]);
-    // }
 
     /**
      * Display the specified resource.
