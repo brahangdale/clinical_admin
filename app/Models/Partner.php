@@ -19,5 +19,9 @@ class Partner extends Model
     {
         return $this->hasOne(User::class, 'partner_id');
     }
+    public function clinicalAdmins()
+    {
+        return $this->hasMany(ClinicalAdmin::class, 'partner_id');
+    }
 
 }

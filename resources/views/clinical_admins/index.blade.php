@@ -2,165 +2,175 @@
 @section('main-container')
   @if(auth()->user()->role == 'super_admin')
     <!-- <div class="sam-dashboard-main"> -->
-      <div class="sam-clinic-header">
-        <div>
-          <h3 class="sam-clinic-title">Clinics Management</h3>
-          <p class="text-muted mb-0">
-            Manage all clinics and hospitals
-          </p>
+    <div class="sam-clinic-header">
+      <div>
+        <h3 class="sam-clinic-title">Clinics Management</h3>
+        <p class="text-muted mb-0">
+          Manage all clinics and hospitals
+        </p>
+      </div>
+
+      <button class="btn sam-clinic-add-btn" data-bs-toggle="modal" data-bs-target="#samAddClinicModal">
+        <i class="fa-solid fa-plus"></i>Add New Clinic
+      </button>
+
+      <!-- Add Clinic Modal -->
+      <div class="modal fade" id="samAddClinicModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content sam-clinic-modal">
+            <!-- Header -->
+            <div class="modal-header">
+              <h5 class="modal-title">
+                <i class="fa-solid fa-hospital me-2"></i>Add New Clinic
+              </h5>
+              <button type="reset" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <!-- Body -->
+
+            <div class="modal-body">
+              <form id="samClinicForm" action="{{ route('clinical_admins.store') }}" method="post">
+                @csrf
+                <input type="hidden" name="modal_id" value="samAddClinicModal">
+                <div class="row">
+
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label">Clinic Name *</label>
+                    <input type="text" name="clinic_name"  value="{{ old('clinic_name') }}" class="form-control sam-clinic-input" placeholder="Enter Clinic Name">
+                    <span class="text-danger">
+                      @error('clinic_name')
+                        <small>{{ $message }}</small> 
+                      @enderror
+                    </span>
+                  </div>
+
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label">User Name *</label>
+                    <input type="text" name="user_name" value="{{ old('user_name') }}" class="form-control sam-clinic-input" placeholder="Enter Owner Name">
+                    <span class="text-danger">
+                      @error('user_name')
+                        <small>{{ $message }}</small> 
+                      @enderror
+                    </span>
+                  </div>
+
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label">Mobile Number *</label>
+                    <input type="number" name="mobile_number" value="{{ old('mobile_number') }}" class="form-control sam-clinic-input" placeholder="Enter Mobile">
+                    <span class="text-danger">
+                      @error('mobile_number')
+                        <small>{{ $message }}</small> 
+                      @enderror
+                    </span>
+                  </div>
+
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" name="email" value="{{ old('email') }}" class="form-control sam-clinic-input" placeholder="Enter Email">
+                    <span class="text-danger">
+                      @error('email')
+                        <small>{{ $message }}</small> 
+                      @enderror
+                    </span>
+                  </div>
+
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label">City</label>
+                    <input type="text" name="city" value="{{ old('city') }}" class="form-control sam-clinic-input" placeholder="Enter City">
+                    
+                  </div>
+
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label">State</label>
+                    <input type="text" name="state" value="{{ old('state') }}" class="form-control sam-clinic-input" placeholder="Enter State">
+                  </div>
+
+                  <div class="col-12 mb-3">
+                    <label class="form-label">Address</label>
+                    <textarea rows="3", name="address" class="form-control sam-clinic-input" placeholder="Enter Address">{{ old('address') }}</textarea>
+                  </div>
+
+                  <div class="col-md-6">
+                    <label class="form-label">Status</label>
+                    <select class="form-select sam-clinic-input" name="status">
+                      <option value="0" selected>Inactive</option>
+                      <option value="1" >Active</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="reset" class="btn btn-light" data-bs-dismiss="modal">
+                    Cancel
+                  </button>
+                  <button type="submit" class="btn btn-primary">Save Clinic</button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <button class="btn sam-clinic-add-btn" data-bs-toggle="modal" data-bs-target="#samAddClinicModal">
-          <i class="fa-solid fa-plus"></i>Add New Clinic
-        </button>
+      <!-- after save clinic info -->
+      @if(session('success'))
+        <div class="modal fade" id="samCredentialModal" tabindex="-1">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
 
-        <!-- Add Clinic Modal -->
-        <div class="modal fade" id="samAddClinicModal" tabindex="-1">
-          <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content sam-clinic-modal">
-              <!-- Header -->
               <div class="modal-header">
                 <h5 class="modal-title">
-                  <i class="fa-solid fa-hospital me-2"></i>Add New Clinic
+                  Clinic Created Successfully
                 </h5>
-                <button type="reset" class="btn-close" data-bs-dismiss="modal"></button>
               </div>
-              <!-- Body -->
 
               <div class="modal-body">
-                <form id="samClinicForm" action="{{ route('clinical_admins.store') }}" method="post">
-                  @csrf
-                  <input type="hidden" name="modal_id" value="samAddClinicModal">
-                  <div class="row">
+                <p><strong>Username:</strong>
+                {{ session('username') }}
+                </p>
+                <p><strong>Password:</strong>
+                  {{ session('password') }}
+                </p>
+                <p><strong>Admin URL:</strong>
+                  yourdomain.com/admin
+                </p>
+                <p><strong>Clinic Website URL:</strong>
+                  yourdomain.com/clinicname
+                </p>
+              </div>
 
-                    <div class="col-md-6 mb-3">
-                      <label class="form-label">Clinic Name *</label>
-                      <input type="text" name="clinic_name"  value="{{ old('clinic_name') }}" class="form-control sam-clinic-input" placeholder="Enter Clinic Name">
-                      <span class="text-danger">
-                        @error('clinic_name')
-                          <small>{{ $message }}</small> 
-                        @enderror
-                      </span>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                      <label class="form-label">User Name *</label>
-                      <input type="text" name="user_name" value="{{ old('user_name') }}" class="form-control sam-clinic-input" placeholder="Enter Owner Name">
-                      <span class="text-danger">
-                        @error('user_name')
-                          <small>{{ $message }}</small> 
-                        @enderror
-                      </span>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                      <label class="form-label">Mobile Number *</label>
-                      <input type="number" name="mobile_number" value="{{ old('mobile_number') }}" class="form-control sam-clinic-input" placeholder="Enter Mobile">
-                      <span class="text-danger">
-                        @error('mobile_number')
-                          <small>{{ $message }}</small> 
-                        @enderror
-                      </span>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                      <label class="form-label">Email Address</label>
-                      <input type="email" name="email" value="{{ old('email') }}" class="form-control sam-clinic-input" placeholder="Enter Email">
-                      <span class="text-danger">
-                        @error('email')
-                          <small>{{ $message }}</small> 
-                        @enderror
-                      </span>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                      <label class="form-label">City</label>
-                      <input type="text" name="city" value="{{ old('city') }}" class="form-control sam-clinic-input" placeholder="Enter City">
-                      
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                      <label class="form-label">State</label>
-                      <input type="text" name="state" value="{{ old('state') }}" class="form-control sam-clinic-input" placeholder="Enter State">
-                    </div>
-
-                    <div class="col-12 mb-3">
-                      <label class="form-label">Address</label>
-                      <textarea rows="3", name="address" class="form-control sam-clinic-input" placeholder="Enter Address">{{ old('address') }}</textarea>
-                    </div>
-
-                    <div class="col-md-6">
-                      <label class="form-label">Status</label>
-                      <select class="form-select sam-clinic-input" name="status">
-                        <option value="0" selected>Inactive</option>
-                        <option value="1" >Active</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="reset" class="btn btn-light" data-bs-dismiss="modal">
-                      Cancel
-                    </button>
-                    <button type="submit" class="btn btn-primary">Save Clinic</button>
-                  </div>
-                </form>
+              <div class="modal-footer">
+                <button class="btn btn-primary" data-bs-dismiss="modal">
+                  Copy Credentials
+                </button>
               </div>
             </div>
           </div>
         </div>
-
-        <!-- after save clinic info -->
-        @if(session('success'))
-          <div class="modal fade" id="samCredentialModal" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-
-                <div class="modal-header">
-                  <h5 class="modal-title">
-                    Clinic Created Successfully
-                  </h5>
-                </div>
-
-                <div class="modal-body">
-                  <p><strong>Username:</strong>
-                  {{ session('username') }}
-                  </p>
-                  <p><strong>Password:</strong>
-                    {{ session('password') }}
-                  </p>
-                  <p><strong>Admin URL:</strong>
-                    yourdomain.com/admin
-                  </p>
-                  <p><strong>Clinic Website URL:</strong>
-                    yourdomain.com/clinicname
-                  </p>
-                </div>
-
-                <div class="modal-footer">
-                  <button class="btn btn-primary" data-bs-dismiss="modal">
-                    Copy Credentials
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        @endif
-        <!-- after save clinic info end -->
-      </div>
-
-      <!-- SEARCH -->
-
-      <div class="sam-clinic-card">
+      @endif
+      <!-- after save clinic info end -->
+    </div>
+    <!-- SEARCH -->
+    <div class="sam-clinic-card">
+      <form method="GET" action="{{ route('clinical_admins.index') }}">
         <div class="row">
           <div class="col-lg-4">
-            <form method="GET" action="{{ route('clinical_admins.index') }}">
-              <input type="text" name="search" class="form-control sam-clinic-search"
-              placeholder="Search Clinic" value="{{ request('search') }}">
-              <button type="submit" class="btn btn-primary">search</button>
-            </form>
+            <input type="text" name="search" class="form-control sam-clinic-search"
+            placeholder="Search Clinic" value="{{ request('search') }}">
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <div class="d-flex gap-2 sam-filter-btns">
+              <button class="btn btn-primary flex-fill">
+                Search
+              </button>
+              <a href="{{ route('clinical_admins.index') }}"
+                class="btn btn-outline-secondary ">
+                Reset
+              </a>
+            </div>
           </div>
         </div>
-      </div>
+      </form>
+    </div>
+        <!-- </div>
+      </div> -->
 
       <!-- Content -->
 

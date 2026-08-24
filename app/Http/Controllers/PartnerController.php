@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appointment;
+use App\Models\Doctor;
 use App\Models\Partner;
+use App\Models\Patient;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,12 +22,31 @@ class PartnerController extends Controller
       $partners = Partner::with('user')
       ->when($request->search, function ($query) use ($request) {
           $query->where(
-              'clinic_name',
+              'partner_name',
               'like',
               '%' . $request->search . '%'
           );
       })->latest()
       ->paginate(5)->withQueryString();
+      foreach ($partners as $partner) {
+
+    $clinicIds = $partner->clinicalAdmins->pluck('id');
+
+    $partner->doctors_count = Doctor::whereIn(
+        'clinical_admin_id',
+        $clinicIds
+    )->count();
+
+    $partner->patients_count = Patient::whereIn(
+        'clinical_admin_id',
+        $clinicIds
+    )->count();
+
+    $partner->appointments_count = Appointment::whereIn(
+        'clinical_admin_id',
+        $clinicIds
+    )->count();
+}
 
       $total_partners = Partner::count();
       $inactive_partners = User::where('role', 'sub_admin')
