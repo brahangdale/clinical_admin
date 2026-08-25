@@ -87,12 +87,12 @@
                 <span class="input-group-text sam-login-input-group-text">
                   <i class="fa fa-user"></i>
                 </span>
-                <input type="text" class="form-control sam-login-input"placeholder="Enter Username" name="user_name">
+                <input type="email" class="form-control sam-login-input"placeholder="Enter Email" name="email">
                 <br>
                 
               </div>
               <span class="text-danger">
-                  @error('user_name')
+                  @error('email')
                   {{ $message }}
                   @enderror
                 </span>

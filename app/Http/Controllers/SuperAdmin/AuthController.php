@@ -19,17 +19,18 @@ class AuthController extends Controller
 
   public function authenticate(Request $request){
     $request->validate([
-      'user_name' => 'required',
+      'email' => 'required',
       'password' => 'required'
     ]);
 
-    $user = $request->only('user_name', 'password');
+    $user = $request->only('email', 'password');
     if(Auth::attempt($user)){
       $request->session()->regenerate();
       if(Auth::check()){
         $userDetails = Auth::user();
         Session::put('name', $userDetails->user_name);
         Session::put('userId', $userDetails->id);
+        Session::put('email', $userDetails->email);
        
         if (auth()->user()->role == 'super_admin') {
           return redirect('/superadmin/dashboard');
@@ -44,7 +45,7 @@ class AuthController extends Controller
     }
     else{
       return redirect()->back()->withErrors([
-      'user_name' => 'Invalid username',
+      'email' => 'Invalid Email',
       'password' => 'Invalid password'
       ])->withInput();
     }

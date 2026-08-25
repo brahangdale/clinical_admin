@@ -64,7 +64,7 @@
                   </div>
 
                   <div class="col-md-6 mb-3">
-                    <label class="form-label">Email Address</label>
+                    <label class="form-label">Email *</label>
                     <input type="email" name="email" value="{{ old('email') }}" class="form-control sam-clinic-input" placeholder="Enter Email">
                     <span class="text-danger">
                       @error('email')
@@ -169,103 +169,103 @@
         </div>
       </form>
     </div>
-        <!-- </div>
-      </div> -->
+    <!-- </div>
+    </div> -->
 
       <!-- Content -->
 
-      <div class="sam-dashboard-content">
-        <div class="row g-4 mt-1">
-          <div class="col-lg-4">
-            <div class="sam-clinic-stats-card">
-              <h6>Total Clinics</h6>
-              <h2>{{$total_clinics}}</h2>
-            </div>
-          </div>
-
-          <div class="col-lg-4">
-            <div class="sam-clinic-stats-card">
-              <h6>Active Clinics</h6>
-              <h2>{{$active_clinics}}</h2>
-            </div>
-          </div>
-
-          <div class="col-lg-4">
-            <div class="sam-clinic-stats-card">
-              <h6>Inactive Clinics</h6>
-              <h2>{{$inactive_clinics}}</h2>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Recent Clinics -->
-
-        <div class="sam-clinic-card mt-4">
-          <div class="table-responsive">
-            <table class="table align-middle sam-clinic-table">
-              <thead>
-                <tr>
-                  <th>Clinic Name</th>
-                  <th>Owner</th>
-                  <th>Mobile</th>
-                  <th>Partner Name</th>
-                  <th>Status</th>
-                  <th>Created</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                @forelse($clinical_admins as $clinic)
-                  <tr id="row-{{ $clinic->id }}">
-                    <td>
-                      <strong>{{$clinic->clinic_name}}</strong>
-                    </td>
-                    <td>{{ $clinic->user?->user_name }}</td>
-                    <td>{{$clinic?->mobile_number}}</td>
-                    <td>{{ $clinic->partner?->partner_name }}</td>
-                    <td class="status-text"> 
-                      @if($clinic->user?->status == 1)
-                        <span class="badge bg-success">Active</span>
-                      @else
-                        <span class="badge bg-danger">Inactive</span>
-                      @endif
-                    </td>
-                    <td>
-                      {{ $clinic->created_at->format('d-M-Y') }}
-                    </td>
-                    <td>
-                      <button class="btn btn-sm btn-primary" data-bs-toggle="offcanvas" data-bs-target="#samClinicViewOffcanvas{{ $clinic->id }}">
-                        View
-                      </button>
-                      <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#samEditClinicModal{{ $clinic->id }}">
-                        Edit
-                      </button>
-                      @if($clinic->user?->status == 1)
-                        <button class="btn btn-sm btn-danger toggle-clinic" data-id="{{ $clinic->id }}">
-                          Disable
-                        </button>
-                      @else
-                        <button class="btn btn-sm btn-success toggle-clinic" data-id="{{ $clinic->id }}">
-                          Enable
-                        </button>
-                      @endif
-                    </td>
-                  </tr>
-                @empty
-                  <tr>
-                    <td colspan="6" class="text-center">No Clinics Found</td>
-                  </tr>
-                @endforelse
-              </tbody>
-            </table>
+    <div class="sam-dashboard-content">
+      <div class="row g-4 mt-1">
+        <div class="col-lg-4">
+          <div class="sam-clinic-stats-card">
+            <h6>Total Clinics</h6>
+            <h2>{{$total_clinics}}</h2>
           </div>
         </div>
-        <div class="d-flex justify-content-end mt-3">
-        {{ $clinical_admins->links() }}
-    </div>
+
+        <div class="col-lg-4">
+          <div class="sam-clinic-stats-card">
+            <h6>Active Clinics</h6>
+            <h2>{{$active_clinics}}</h2>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="sam-clinic-stats-card">
+            <h6>Inactive Clinics</h6>
+            <h2>{{$inactive_clinics}}</h2>
+          </div>
+        </div>
+
       </div>
+
+      <!-- Recent Clinics -->
+
+      <div class="sam-clinic-card mt-4">
+        <div class="table-responsive">
+          <table class="table align-middle sam-clinic-table">
+            <thead>
+              <tr>
+                <th>Clinic Name</th>
+                <th>Owner</th>
+                <th>Mobile</th>
+                <th>Partner Name</th>
+                <th>Status</th>
+                <th>Created</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              @forelse($clinical_admins as $clinic)
+                <tr id="row-{{ $clinic->id }}">
+                  <td>
+                    <strong>{{$clinic->clinic_name}}</strong>
+                  </td>
+                  <td>{{ $clinic->user?->user_name }}</td>
+                  <td>{{$clinic?->mobile_number}}</td>
+                  <td>{{ $clinic->partner?->partner_name }}</td>
+                  <td class="status-text"> 
+                    @if($clinic->user?->status == 1)
+                      <span class="badge bg-success">Active</span>
+                    @else
+                      <span class="badge bg-danger">Inactive</span>
+                    @endif
+                  </td>
+                  <td>
+                    {{ $clinic->created_at->format('d-M-Y') }}
+                  </td>
+                  <td>
+                    <button class="btn btn-sm btn-primary" data-bs-toggle="offcanvas" data-bs-target="#samClinicViewOffcanvas{{ $clinic->id }}">
+                      View
+                    </button>
+                    <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#samEditClinicModal{{ $clinic->id }}">
+                      Edit
+                    </button>
+                    @if($clinic->user?->status == 1)
+                      <button class="btn btn-sm btn-danger toggle-clinic" data-id="{{ $clinic->id }}">
+                        Disable
+                      </button>
+                    @else
+                      <button class="btn btn-sm btn-success toggle-clinic" data-id="{{ $clinic->id }}">
+                        Enable
+                      </button>
+                    @endif
+                  </td>
+                </tr>
+              @empty
+                <tr>
+                  <td colspan="6" class="text-center">No Clinics Found</td>
+                </tr>
+              @endforelse
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="d-flex justify-content-end mt-3">
+      {{ $clinical_admins->links() }}
+  </div>
+    </div>
     <!-- </div> -->
 
     <!-- offcanvas and model code view and edit btn start -->
@@ -285,115 +285,97 @@
               </tr>
 
               <tr>
-                  <th>Owner</th>
-                  <td>{{$clinic->user?->user_name}}</td>
+                <th>Owner</th>
+                <td>{{$clinic->user?->user_name}}</td>
               </tr>
 
               <tr>
-                  <th>Mobile</th>
-                  <td>{{$clinic->mobile_number}}</td>
+                <th>Mobile</th>
+                <td>{{$clinic->mobile_number}}</td>
               </tr>
 
               <tr>
-                  <th>Email</th>
-                  <td>{{ $clinic->user?->email }}</td>
+                <th>Email</th>
+                <td>{{ $clinic->user?->email }}</td>
               </tr>
 
               <tr>
-                  <th>Status</th>
-                  <td>
-                    @if($clinic->user?->status == 1)
-                      <span class="badge bg-success">Active</span>
-                    @else
-                      <span class="badge bg-danger">Inactive</span>
-                    @endif
-                  </td>
+                <th>Status</th>
+                <td>
+                  @if($clinic->user?->status == 1)
+                    <span class="badge bg-success">Active</span>
+                  @else
+                    <span class="badge bg-danger">Inactive</span>
+                  @endif
+                </td>
               </tr>
             </table>
           </div>
           <hr>
           <div class="sam-clinic-view-section">
-
             <h6>Admin Credentials</h6>
-
             <table class="table">
+              <tr>
+                <th>Username</th>
+                <td>{{$clinic->user?->user_name}}</td>
+              </tr>
 
-                <tr>
-                    <th>Username</th>
-                    <td>{{$clinic->user?->user_name}}</td>
+              <tr>
+                <th>Password</th>
+                <td>{{ $clinic->user?->visible_password ?? '-' }}</td>
+              </tr>
+
+              <tr>
+                <th>Admin URL</th>
+                <td>yourdomain.com/admin</td>
                 </tr>
 
-                <tr>
-                    <th>Password</th>
-                    <td>{{ $clinic->user?->visible_password ?? '-' }}</td>
-                </tr>
-
-                <tr>
-                    <th>Admin URL</th>
-                    <td>yourdomain.com/admin</td>
-                </tr>
-
-                <tr>
-                    <th>Patient URL</th>
-                    <td>yourdomain.com/akasa-clinic</td>
-                </tr>
-
+              <tr>
+                <th>Patient URL</th>
+                <td>yourdomain.com/akasa-clinic</td>
+              </tr>
             </table>
-
           </div>
 
           <hr>
 
           <div class="row g-3">
 
-                <div class="col-6">
+            <div class="col-6">
 
-                    <div class="sam-clinic-mini-card">
+                <div class="sam-clinic-mini-card">
 
-                        <h6>Doctors</h6>
+                    <h6>Doctors</h6>
 
-                        <h3>{{ $clinic->doctors_count }}</h3>
-
-                    </div>
+                    <h3>{{ $clinic->doctors_count }}</h3>
 
                 </div>
 
-                <div class="col-6">
+            </div>
 
-                    <div class="sam-clinic-mini-card">
+            <div class="col-6">
 
-                        <h6>Patients</h6>
+                <div class="sam-clinic-mini-card">
 
-                        <h3>{{ $clinic->appointments_count }}</h3>
+                    <h6>Patients</h6>
 
-                    </div>
-
-                </div>
-
-                <div class="col-6">
-
-                    <div class="sam-clinic-mini-card">
-
-                        <h6>Appointments</h6>
-
-                        <h3>{{ $clinic->appointments_count }}</h3>
-
-                    </div>
+                    <h3>{{ $clinic->appointments_count }}</h3>
 
                 </div>
 
-                <!-- <div class="col-6">
+            </div>
 
-                    <div class="sam-clinic-mini-card">
+            <div class="col-6">
 
-                        <h6>Receptionists</h6>
+                <div class="sam-clinic-mini-card">
 
-                        <h3>4</h3>
+                    <h6>Appointments</h6>
 
-                    </div>
+                    <h3>{{ $clinic->appointments_count }}</h3>
 
-                </div> -->
+                </div>
 
+            </div>
           </div>
         </div>
       </div>
