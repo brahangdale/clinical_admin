@@ -40,6 +40,7 @@ Route::prefix('clinical_admins')->middleware(['auth', 'role:clinic_admin'])->gro
     Route::post('/appointment/{appointment}/skip', [ClinicalDashboardController::class, 'skipToken'])->name('clinical_admins.appointment.skip');
     Route::post('/appointment/{appointment}/complete',[ClinicalDashboardController::class, 'completeToken'])->name('clinical_admins.appointment.complete');
     
+    Route::get('/notifications', [ClinicalDashboardController::class, 'notifications' ])->name('clinical_admins.dashboard.notifications');
 
     Route::get('/clinic_setting', [ClinicSettingController::class, 'clinic_setting'])
       ->name('clinical_admins.setting');
@@ -71,7 +72,8 @@ Route::middleware(['auth'])->group(function () {
   Route::resource('appointments', AppointmentController::class);
   Route::get('/get-doctors/{clinic}', [AppointmentController::class, 'getDoctors']);
   Route::post('/update-status/{appointment}',[AppointmentController::class, 'updateStatus'])->name('appointments.updateStatus');
-  
+  Route::post('/appointments/{appointment}/fee', 
+    [AppointmentController::class, 'updateFees'])->name('appointments.update-fees');
 });
 Route::get('/doctors/{doctor}/schedule', [DoctorController::class, 'schedule'])->name('doctors.schedule');
 

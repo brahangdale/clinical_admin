@@ -5,18 +5,18 @@
     <div class="table-responsive">
       <table class="table align-middle">
         <thead>
-              <tr>
-                <th>TK No</th>
-                <th>Patient</th>
-                <th>Doctor</th>
-                <!-- <th>Clinic</th> -->
-                <th>{{ auth()->user()->role == 'super_admin' ? 'Clinic' : '' }}</th>
-                <th>Date</th>
-                <th>Shift & Time</th>
-                
-                <th>Status</th>
-                <th>Action</th>
-              </tr>
+          <tr>
+            <th>TK No</th>
+            <th>Patient</th>
+            <th>Doctor</th>
+            <!-- <th>Clinic</th> -->
+            <th>{{ auth()->user()->role == 'super_admin' ? 'Clinic' : '' }}</th>
+            <th>Date</th>
+            <th>Shift & Time</th>
+            <th>Status</th>
+            <th>Fees</th>
+            <th>Action</th>
+          </tr>
         </thead>
         <tbody>
           @forelse($todayQueue as $appointment)
@@ -30,6 +30,7 @@
             <td> <span><b>{{ $appointment->shift_name }}</b></span><br>
               <small>{{ $appointment->shift_time }}</small>
             </td>
+            
             <!-- <td class="availablee-status">{{ $appointment->status }}</td> -->
             <td>
               <select class="form-select form-select-sm appointment-status
@@ -59,6 +60,17 @@
                 </option>
               </select>
             </td>
+            <td>
+              <div id="consultationFee{{ $appointment->id }}" style="{{ $appointment->status == 'completed' ? '' : 'display:none;' }}">
+                <input
+                type="number"
+                class="form-control form-control-sm consultation-fee-input"
+                id="fee{{ $appointment->id }}"
+                data-id="{{ $appointment->id }}"
+                data-default-fee="{{ $appointment->doctor->consultation_fee ?? '' }}"
+                value="{{ $appointment->consultation_fee ?? $appointment->doctor->consultation_fee ?? '' }}"
+                placeholder="Consultation Fee">
+              </div>
             <td>
               <button
                 class="btn btn-sm btn-primary"

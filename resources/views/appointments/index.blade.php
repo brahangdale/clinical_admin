@@ -98,6 +98,7 @@
                 <th>{{ auth()->user()->role == 'super_admin' ? 'Clinic' : '' }}</th>
                 <th>Date</th>
                 <th>Shift & Time</th>
+                <th>Consultation Fee</th>
                 <th>Status</th>
                 <th>Action</th>
               </tr>
@@ -115,6 +116,8 @@
             <!-- <td>{{ $appointment->appointment_time }}</td> -->
             <td> <span><b>{{ $appointment->shift_name }}</b></span><br>
               <small>{{ $appointment->shift_time }}</small>
+            </td>
+            
             </td>
             <!-- <td class="availablee-status">{{ $appointment->status }}</td> -->
             <td class="">{{ $appointment->status }}</td>
@@ -990,4 +993,5 @@
       data-errors="{{ $errors->any() ? '1' : '0' }}"
       data-success="{{ session('success') ? '1' : '0' }}"
       data-modal-id="{{ old('modal_id') }}"></div>
+      
 @endsection

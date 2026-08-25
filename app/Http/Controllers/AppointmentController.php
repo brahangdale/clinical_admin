@@ -319,6 +319,22 @@ class AppointmentController extends Controller
       }
     }
 
+
+    public function updateFees(Request $request, Appointment $appointment)
+    {
+      $request->validate([
+          'consultation_fee' => 'required|numeric|min:0',
+      ]);
+
+      $appointment->update([
+          'consultation_fee' => $request->consultation_fee,
+      ]);
+
+      return response()->json([
+          'success' => true,
+          'message' => 'Consultation fee updated successfully.',
+      ]);
+    }
     /**
      * Remove the specified resource from storage.
      */

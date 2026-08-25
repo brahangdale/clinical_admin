@@ -174,10 +174,10 @@ class ClinicalDashboardController extends Controller
             'message' => $e->getMessage(),
         ], 500);
     }
-}
+  }
 
 
-public function completeToken(Appointment $appointment)
+  public function completeToken(Appointment $appointment)
 {
     
     DB::beginTransaction();
@@ -245,14 +245,17 @@ public function completeToken(Appointment $appointment)
             'message' => $e->getMessage(),
         ], 500);
     }
-}
+  }
 
-public function add_appointment(){
+  public function add_appointment(){
     $clinicId = auth()->user()->clinical_admin_id;
     $doctors = Doctor::where('clinical_admin_id', $clinicId)->get();
     return view('clinical_admins.dashboard.add_appointment', compact('doctors'));
   }
 
+  public function notifications(){
+    return view('clinical_admins.dashboard.notifications');
+  }
 
 
 }

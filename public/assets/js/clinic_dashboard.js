@@ -193,3 +193,85 @@ function updateCurrentTokenCard(response) {
 
     }, 300);
 }
+
+document.addEventListener('change', function(e) {
+  if (e.target.classList.contains('appointment-status')) {
+
+    const appointmentId = e.target.dataset.id;
+    const status = e.target.value;
+
+    const feeBox = document.getElementById(
+        'consultationFee' + appointmentId
+    );
+
+    const feeInput = document.getElementById(
+        'fee' + appointmentId
+    );
+
+
+    // If Completed → Show Fee Input
+    if (status === 'completed') {
+
+        feeBox.style.display = 'block';
+
+        // If fee is empty, use doctor's default fee
+        if (!feeInput.value) {
+
+            feeInput.value =
+                feeInput.dataset.defaultFee ?? '';
+
+        }
+
+    } else {
+
+        // Other status → Hide Fee Input
+        feeBox.style.display = 'none';
+
+    }
+
+}
+
+
+// FEE CHANGE
+if (e.target.classList.contains('consultation-fee-input')) {
+
+    const appointmentId = e.target.dataset.id;
+
+    const fee = e.target.value;
+
+
+    if (fee === '') {
+        return;
+    }
+    fetch('/appointments/' + appointmentId + '/fee', {
+        method: 'POST',
+
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector(
+                'meta[name="csrf-token"]'
+            ).getAttribute('content'),
+            'Accept': 'application/json'
+        },
+
+        body: JSON.stringify({
+            consultation_fee: fee
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+
+        if (data.success) {
+
+            console.log('Fee saved successfully');
+
+        }
+
+    })
+    .catch(error => {
+
+        console.error(error);
+
+    });
+  }
+});

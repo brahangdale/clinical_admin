@@ -122,9 +122,9 @@
   <div class="sam-dashboard-search">
   </div>
   <div class="sam-dashboard-header-right">
-    <div class="sam-dashboard-notification">
+    <!-- <div class="sam-dashboard-notification">
       <i class="fa-solid fa-bell"></i>
-    </div>
+    </div> -->
     <div class="sam-dashboard-profile">
       <img
           src="https://ui-avatars.com/api/?name={{ session('name') }}"
