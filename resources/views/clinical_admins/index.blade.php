@@ -285,7 +285,7 @@
               </tr>
 
               <tr>
-                <th>Owner</th>
+                <th>Owner / Username</th>
                 <td>{{$clinic->user?->user_name}}</td>
               </tr>
 

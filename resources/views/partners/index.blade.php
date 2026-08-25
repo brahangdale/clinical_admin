@@ -294,11 +294,6 @@
             </tr>
 
             <tr>
-                <th>Email</th>
-                <td>{{ $partner->user?->email }}</td>
-            </tr>
-
-            <tr>
                 <th>Status</th>
                 <td>
                   @if($partner->user?->status == 1)
@@ -317,8 +312,8 @@
 
           <table class="table">
             <tr>
-              <th>Password</th>
-              <td>{{ $partner->user?->visible_password ?? '-' }}</td>
+              <th>Email</th>
+              <td>{{ $partner->user?->email  }}</td>
             </tr>
 
             <tr>
