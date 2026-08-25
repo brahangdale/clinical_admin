@@ -316,26 +316,25 @@
           <h6>Admin Credentials</h6>
 
           <table class="table">
+            <tr>
+              <th>Password</th>
+              <td>{{ $partner->user?->visible_password ?? '-' }}</td>
+            </tr>
 
-              <tr>
-                  <th>Username</th>
-                  <td>{{$partner->user?->user_name}}</td>
-              </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{$partner->user?->visible_password}}<td>
+            </tr>
 
-              <tr>
-                  <th>Password</th>
-                  <td>{{$partner->user?->visible_password}}<td>
-              </tr>
+            <tr>
+                <th>Admin URL</th>
+                <td>yourdomain.com/admin</td>
+            </tr>
 
-              <tr>
-                  <th>Admin URL</th>
-                  <td>yourdomain.com/admin</td>
-              </tr>
-
-              <tr>
-                  <th>Patient URL</th>
-                  <td>yourdomain.com/akasa-clinic</td>
-              </tr>
+            <tr>
+                <th>Patient URL</th>
+                <td>yourdomain.com/akasa-clinic</td>
+            </tr>
 
           </table>
 

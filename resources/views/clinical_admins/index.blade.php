@@ -293,12 +293,6 @@
                 <th>Mobile</th>
                 <td>{{$clinic->mobile_number}}</td>
               </tr>
-
-              <tr>
-                <th>Email</th>
-                <td>{{ $clinic->user?->email }}</td>
-              </tr>
-
               <tr>
                 <th>Status</th>
                 <td>
@@ -316,8 +310,8 @@
             <h6>Admin Credentials</h6>
             <table class="table">
               <tr>
-                <th>Username</th>
-                <td>{{$clinic->user?->user_name}}</td>
+                <th>Email</th>
+                <td>{{ $clinic->user?->email }}</td>
               </tr>
 
               <tr>
