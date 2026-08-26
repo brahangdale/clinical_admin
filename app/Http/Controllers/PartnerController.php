@@ -8,6 +8,7 @@ use App\Models\Partner;
 use App\Models\Patient;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -116,13 +117,14 @@ class PartnerController extends Controller
             'email'     => $request->email,
             'password'  => Hash::make($password),
             'status'    => $request->status ,
+            'visible_password' => Crypt::encryptString($password),
             'role'   => 'sub_admin' 
           ]);
 
           DB::commit();
 
           return redirect()
-            ->route('clinical_admins.index')
+            ->route('partners.index')
             ->with('success', true)
             ->with('username', $user->email)
             ->with('password', $password);

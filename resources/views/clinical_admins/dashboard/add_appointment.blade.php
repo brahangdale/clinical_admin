@@ -115,30 +115,7 @@
         </div>
 
       <!-- Appointment Time -->
-      <div class="col-md-6">
-          <label class="form-label fw-semibold">
-            Appointment Time <span class="text-danger">*</span>
-          </label>
-          <input type="time" class="form-control"  name="appointment_time" value="{{ old('appointment_time') }}">
-          <!-- <div class="input-group" id="appointmentTimePicker">
-            <input
-                type="text"
-                class="form-control"
-                id="appointment_time"
-                name="appointment_time"
-                value="{{ old('appointment_time') }}"
-                placeholder="Select Time">
-
-            <span class="input-group-text">
-                <i class="fa fa-clock"></i>
-            </span>
-          </div> -->
-          @error('appointment_time')
-            <span class="text-danger">
-                {{ $message }}
-            </span>
-          @enderror 
-        </div>
+      
       <!-- date of birth -->
         <div class="row">
         <div class="col-md-4">

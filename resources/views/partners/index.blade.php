@@ -3,24 +3,24 @@
   <!-- <div class="sam-dashboard-main"> -->
   <div class="sam-clinic-header">
     <div>
-      <h3 class="sam-clinic-title">Clinics Management</h3>
+      <h3 class="sam-clinic-title">Partners Management</h3>
       <p class="text-muted mb-0">
-        Manage all clinics and hospitals
+        Manage all Partners
       </p>
     </div>
 
     <button class="btn sam-clinic-add-btn" data-bs-toggle="modal" data-bs-target="#samAddClinicModal">
-      <i class="fa-solid fa-plus"></i>Add New Clinic
+      <i class="fa-solid fa-plus"></i>Add New Partner
     </button>
 
-    <!-- Add Clinic Modal -->
+    <!-- Add partner Modal -->
     <div class="modal fade" id="samAddClinicModal" tabindex="-1">
       <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content sam-clinic-modal">
           <!-- Header -->
           <div class="modal-header">
             <h5 class="modal-title">
-              <i class="fa-solid fa-hospital me-2"></i>Add New Clinic
+              <i class="fa-solid fa-hospital me-2"></i>Add New Partner
             </h5>
             <button type="reset" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
@@ -100,7 +100,7 @@
                 <button type="reset" class="btn btn-light" data-bs-dismiss="modal">
                   Cancel
                 </button>
-                <button type="submit" class="btn btn-primary">Save Clinic</button>
+                <button type="submit" class="btn btn-primary">Save Partner</button>
               </div>
             </form>
           </div>
@@ -116,7 +116,7 @@
 
             <div class="modal-header">
               <h5 class="modal-title">
-                Clinic Created Successfully
+                Partner Created Successfully
               </h5>
             </div>
 
@@ -255,7 +255,7 @@
                   </tr>
                 @empty
                   <tr>
-                    <td colspan="6" class="text-center">No Clinics Found</td>
+                    <td colspan="6" class="text-center">No Partners Found</td>
                   </tr>
                 @endforelse
               </tbody>
@@ -449,7 +449,7 @@
                 <div class="col-md-6 mb-3">
 
                     <label class="form-label">
-                        Email
+                        Email *
                     </label>
 
                     <input

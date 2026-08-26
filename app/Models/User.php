@@ -24,6 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
         'user_name',
+        'role',
         'status',
         'clinical_admin_id',
         'partner_id',

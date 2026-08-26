@@ -189,7 +189,7 @@ class AppointmentController extends Controller
 
           if ($request->redirect_to === 'clinic_dashboard') {
               return redirect()
-              ->route('patients.index')
+              ->route('clinical_admins.dashboard.clinic_dashboard')
               ->with('success', 'Patient created successfully.');
           }
           // return redirect()->back()->with('success', 'Appointment booked successfully.');

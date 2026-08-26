@@ -131,6 +131,7 @@
           alt="">
       <strong>{{ session('name') }}</strong>
     </div>
+    <!-- <span>{{ Auth::user()->role  }}</span> -->
   </div>
 </div>
      

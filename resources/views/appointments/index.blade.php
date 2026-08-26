@@ -98,7 +98,7 @@
                 <th>{{ auth()->user()->role == 'super_admin' ? 'Clinic' : '' }}</th>
                 <th>Date</th>
                 <th>Shift & Time</th>
-                <th>Consultation Fee</th>
+                <th>Fees</th>
                 <th>Status</th>
                 <th>Action</th>
               </tr>
@@ -117,8 +117,7 @@
             <td> <span><b>{{ $appointment->shift_name }}</b></span><br>
               <small>{{ $appointment->shift_time }}</small>
             </td>
-            
-            </td>
+            <td>{{ $appointment->consultation_fee  }}</td>
             <!-- <td class="availablee-status">{{ $appointment->status }}</td> -->
             <td class="">{{ $appointment->status }}</td>
             <!-- <td>
@@ -149,6 +148,7 @@
                 </option>
               </select>
             </td> -->
+            
             <td>
               <button
                 class="btn btn-sm btn-primary"
@@ -397,15 +397,15 @@
                         value="{{ old('shift_time', $appointment->shift_time) }}">
                     <!-- ------------------------- -->
 
-                    <div class="col-md-6">
+                    <!-- <div class="col-md-6">
                       <label class="required">Appointment Time</label>
                       <input type="time" class="form-control required-field" name="appointment_time" value="{{ old('appointment_time',$appointment->appointment_time) }}">
                       @error('appointment_time')
                       <span class="text-danger">
-                        {{ $message }}
+                      
                       </span>
                       @enderror
-                    </div>
+                    </div> -->
                     
 
                     <!-- clinic -->
@@ -777,10 +777,10 @@
             <th>Date</th>
             <td>{{$appointment->appointment_date}}</td>
           </tr>
-          <tr>
+          <!-- <tr>
             <th>Time</th>
             <td>{{$appointment->appointment_time}}</td>
-          </tr>
+          </tr> -->
           <tr>
             <th>Status</th>
             <td>
@@ -923,30 +923,7 @@
               </div>
 
             <!-- Appointment Time -->
-            <div class="col-md-6">
-                <label class="form-label fw-semibold">
-                  Appointment Time <span class="text-danger">*</span>
-                </label>
-                <input type="time" class="form-control"  name="appointment_time" value="{{ old('appointment_time') }}">
-                <!-- <div class="input-group" id="appointmentTimePicker">
-                  <input
-                      type="text"
-                      class="form-control"
-                      id="appointment_time"
-                      name="appointment_time"
-                      value="{{ old('appointment_time') }}"
-                      placeholder="Select Time">
-
-                  <span class="input-group-text">
-                      <i class="fa fa-clock"></i>
-                  </span>
-                </div> -->
-                @error('appointment_time')
-                  <span class="text-danger">
-                      {{ $message }}
-                  </span>
-                @enderror 
-              </div>
+           
             <!-- date of birth -->
              <div class="row">
               <div class="col-md-4">
